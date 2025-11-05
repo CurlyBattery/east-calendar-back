@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String @id @default(uuid())
+  email        String @unique
+  passwordHash String @map("password_hash")
+  avatarUrl    String @map("avatar_url")
+  name         String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  tasks         Task[]
+  norifications Notification[]
+  refreshTokens RefreshToken[]
+
+  @@index(id)
+  @@index(email)
+  @@map("users")
+}
+
+model RefreshToken {
+  uuid      String   @id @default(uuid())
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  revoked   Boolean  @default(false)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@index(uuid)
+  @@map("refresh_tokens")
+}
+
+model Notification {
+  id     String  @id @default(uuid())
+  userId String  @map("user_id")
+  data   String
+  title  String
+  isRead Boolean @map("is_read")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@index(id)
+  @@map("notifications")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+
+  @@map("task_statuses")
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+
+  @@map("task_priorities")
+}
+
+model Task {
+  id          String       @id @default(uuid())
+  createdBy   String       @map("created_by")
+  title       String
+  decsription String
+  start       DateTime
+  end         DateTime
+  status      TaskStatus   @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  User        User         @relation(references: [id], fields: [createdBy], onDelete: Cascade)
+  attachments Attachment[]
+
+  @@index(id)
+  @@map("tasks")
+}
+
+model Attachment {
+  id       String @id @default(uuid())
+  taskId   String @map("task_id")
+  fileName String @map("file_name")
+  fileUrl  String @map("file_url")
+  fileType String @map("file_type")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  task Task @relation(references: [id], fields: [taskId], onDelete: Cascade)
+
+  @@index(id)
+  @@map("attachments")
+}
