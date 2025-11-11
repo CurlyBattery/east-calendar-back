@@ -42,6 +42,7 @@ model RefreshToken {
 
   user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 
+  @@unique(userId)
   @@index(uuid)
   @@map("refresh_tokens")
 }

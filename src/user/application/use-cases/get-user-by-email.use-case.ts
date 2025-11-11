@@ -7,17 +7,15 @@ import {
 import { User } from '../../domain/entities/user.entity';
 
 @Injectable()
-export class GetUserUseCase {
+export class GetUserByEmailUseCase {
   constructor(
     @Inject(USER_REPOSITORY)
     private readonly userRepository: UserRepositoryPort,
   ) {}
 
-  async execute(id: string): Promise<User> {
-    const user = await this.userRepository.findById(id);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
+  async execute(email: string): Promise<User> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) return null;
 
     return user;
   }

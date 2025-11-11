@@ -13,7 +13,7 @@ import {
 } from '../application/use-cases/create-user.use-case';
 import { User } from '../domain/entities/user.entity';
 import { ListUsersUseCase } from '../application/use-cases/list-users.use-case';
-import { GetUserUseCase } from '../application/use-cases/get-user.use-case';
+import { GetUserByIdUseCase } from '../application/use-cases/get-user-by-id.use-case';
 import {
   UpdateUserDto,
   UpdateUserUseCase,
@@ -25,7 +25,7 @@ export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly listUsersUseCase: ListUsersUseCase,
-    private readonly getUserUseCase: GetUserUseCase,
+    private readonly getUserUseCase: GetUserByIdUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase,
   ) {}

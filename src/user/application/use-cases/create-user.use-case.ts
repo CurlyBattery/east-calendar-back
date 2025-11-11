@@ -28,8 +28,7 @@ export class CreateUserUseCase {
       throw new BadRequestException('User with this email already exists');
     }
 
-    const passwordHash = await argon2.hash(dto.password);
-    const user = User.create(dto.name, dto.email, passwordHash, dto.avatarUrl);
+    const user = User.create(dto.name, dto.email, dto.password, dto.avatarUrl);
     const savedUser = await this.userRepository.save(user);
 
     return savedUser;

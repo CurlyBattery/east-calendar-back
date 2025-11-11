@@ -6414,15 +6414,15 @@ export namespace Prisma {
 
   export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
     uuid?: string
+    userId?: string
     AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
     OR?: RefreshTokenWhereInput[]
     NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    userId?: StringFilter<"RefreshToken"> | string
     expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
     revoked?: BoolFilter<"RefreshToken"> | boolean
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-  }, "uuid">
+  }, "uuid" | "userId">
 
   export type RefreshTokenOrderByWithAggregationInput = {
     uuid?: SortOrder
