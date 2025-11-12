@@ -2316,52 +2316,52 @@ export namespace Prisma {
   }
 
   export type RefreshTokenMinAggregateOutputType = {
-    uuid: string | null
+    id: string | null
+    token: string | null
     userId: string | null
-    expiresAt: Date | null
-    revoked: boolean | null
+    userAgent: string | null
     createdAt: Date | null
   }
 
   export type RefreshTokenMaxAggregateOutputType = {
-    uuid: string | null
+    id: string | null
+    token: string | null
     userId: string | null
-    expiresAt: Date | null
-    revoked: boolean | null
+    userAgent: string | null
     createdAt: Date | null
   }
 
   export type RefreshTokenCountAggregateOutputType = {
-    uuid: number
+    id: number
+    token: number
     userId: number
-    expiresAt: number
-    revoked: number
+    userAgent: number
     createdAt: number
     _all: number
   }
 
 
   export type RefreshTokenMinAggregateInputType = {
-    uuid?: true
+    id?: true
+    token?: true
     userId?: true
-    expiresAt?: true
-    revoked?: true
+    userAgent?: true
     createdAt?: true
   }
 
   export type RefreshTokenMaxAggregateInputType = {
-    uuid?: true
+    id?: true
+    token?: true
     userId?: true
-    expiresAt?: true
-    revoked?: true
+    userAgent?: true
     createdAt?: true
   }
 
   export type RefreshTokenCountAggregateInputType = {
-    uuid?: true
+    id?: true
+    token?: true
     userId?: true
-    expiresAt?: true
-    revoked?: true
+    userAgent?: true
     createdAt?: true
     _all?: true
   }
@@ -2439,10 +2439,10 @@ export namespace Prisma {
   }
 
   export type RefreshTokenGroupByOutputType = {
-    uuid: string
+    id: string
+    token: string
     userId: string
-    expiresAt: Date
-    revoked: boolean
+    userAgent: string | null
     createdAt: Date
     _count: RefreshTokenCountAggregateOutputType | null
     _min: RefreshTokenMinAggregateOutputType | null
@@ -2464,28 +2464,28 @@ export namespace Prisma {
 
 
   export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    uuid?: boolean
+    id?: boolean
+    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
-    revoked?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["refreshToken"]>
 
   export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    uuid?: boolean
+    id?: boolean
+    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
-    revoked?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["refreshToken"]>
 
   export type RefreshTokenSelectScalar = {
-    uuid?: boolean
+    id?: boolean
+    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
-    revoked?: boolean
+    userAgent?: boolean
     createdAt?: boolean
   }
 
@@ -2502,10 +2502,10 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      uuid: string
+      id: string
+      token: string
       userId: string
-      expiresAt: Date
-      revoked: boolean
+      userAgent: string | null
       createdAt: Date
     }, ExtArgs["result"]["refreshToken"]>
     composites: {}
@@ -2590,8 +2590,8 @@ export namespace Prisma {
      * // Get first 10 RefreshTokens
      * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
      * 
-     * // Only select the `uuid`
-     * const refreshTokenWithUuidOnly = await prisma.refreshToken.findMany({ select: { uuid: true } })
+     * // Only select the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany">>
@@ -2635,9 +2635,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many RefreshTokens and only return the `uuid`
-     * const refreshTokenWithUuidOnly = await prisma.refreshToken.createManyAndReturn({ 
-     *   select: { uuid: true },
+     * // Create many RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({ 
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2901,10 +2901,10 @@ export namespace Prisma {
    * Fields of the RefreshToken model
    */ 
   interface RefreshTokenFieldRefs {
-    readonly uuid: FieldRef<"RefreshToken", 'String'>
+    readonly id: FieldRef<"RefreshToken", 'String'>
+    readonly token: FieldRef<"RefreshToken", 'String'>
     readonly userId: FieldRef<"RefreshToken", 'String'>
-    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
-    readonly revoked: FieldRef<"RefreshToken", 'Boolean'>
+    readonly userAgent: FieldRef<"RefreshToken", 'String'>
     readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
   }
     
@@ -6174,10 +6174,10 @@ export namespace Prisma {
 
 
   export const RefreshTokenScalarFieldEnum: {
-    uuid: 'uuid',
+    id: 'id',
+    token: 'token',
     userId: 'userId',
-    expiresAt: 'expiresAt',
-    revoked: 'revoked',
+    userAgent: 'userAgent',
     createdAt: 'createdAt'
   };
 
@@ -6238,6 +6238,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -6395,40 +6403,40 @@ export namespace Prisma {
     AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
     OR?: RefreshTokenWhereInput[]
     NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    uuid?: StringFilter<"RefreshToken"> | string
+    id?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
     userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revoked?: BoolFilter<"RefreshToken"> | boolean
+    userAgent?: StringNullableFilter<"RefreshToken"> | string | null
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type RefreshTokenOrderByWithRelationInput = {
-    uuid?: SortOrder
+    id?: SortOrder
+    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
-    revoked?: SortOrder
+    userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
-    uuid?: string
-    userId?: string
+    id?: string
+    token?: string
     AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
     OR?: RefreshTokenWhereInput[]
     NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revoked?: BoolFilter<"RefreshToken"> | boolean
+    userId?: StringFilter<"RefreshToken"> | string
+    userAgent?: StringNullableFilter<"RefreshToken"> | string | null
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-  }, "uuid" | "userId">
+  }, "id" | "token">
 
   export type RefreshTokenOrderByWithAggregationInput = {
-    uuid?: SortOrder
+    id?: SortOrder
+    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
-    revoked?: SortOrder
+    userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: RefreshTokenCountOrderByAggregateInput
     _max?: RefreshTokenMaxOrderByAggregateInput
@@ -6439,10 +6447,10 @@ export namespace Prisma {
     AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
     OR?: RefreshTokenScalarWhereWithAggregatesInput[]
     NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
-    uuid?: StringWithAggregatesFilter<"RefreshToken"> | string
+    id?: StringWithAggregatesFilter<"RefreshToken"> | string
+    token?: StringWithAggregatesFilter<"RefreshToken"> | string
     userId?: StringWithAggregatesFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
-    revoked?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+    userAgent?: StringNullableWithAggregatesFilter<"RefreshToken"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
   }
 
@@ -6725,57 +6733,57 @@ export namespace Prisma {
   }
 
   export type RefreshTokenCreateInput = {
-    uuid?: string
-    expiresAt: Date | string
-    revoked?: boolean
+    id?: string
+    token: string
+    userAgent?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutRefreshTokensInput
   }
 
   export type RefreshTokenUncheckedCreateInput = {
-    uuid?: string
+    id?: string
+    token: string
     userId: string
-    expiresAt: Date | string
-    revoked?: boolean
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
   export type RefreshTokenUpdateInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
   }
 
   export type RefreshTokenUncheckedUpdateInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RefreshTokenCreateManyInput = {
-    uuid?: string
+    id?: string
+    token: string
     userId: string
-    expiresAt: Date | string
-    revoked?: boolean
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
   export type RefreshTokenUpdateManyMutationInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RefreshTokenUncheckedUpdateManyInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7112,9 +7120,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type UserRelationFilter = {
@@ -7122,36 +7140,56 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type RefreshTokenCountOrderByAggregateInput = {
-    uuid?: SortOrder
+    id?: SortOrder
+    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
-    revoked?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
   }
 
   export type RefreshTokenMaxOrderByAggregateInput = {
-    uuid?: SortOrder
+    id?: SortOrder
+    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
-    revoked?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
   }
 
   export type RefreshTokenMinOrderByAggregateInput = {
-    uuid?: SortOrder
+    id?: SortOrder
+    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
-    revoked?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NotificationCountOrderByAggregateInput = {
@@ -7179,6 +7217,14 @@ export namespace Prisma {
     title?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumTaskStatusFilter<$PrismaModel = never> = {
@@ -7436,8 +7482,8 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
@@ -7452,6 +7498,10 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutNorificationsInput, UserUncheckedCreateWithoutNorificationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNorificationsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutNorificationsNestedInput = {
@@ -7607,6 +7657,48 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -7717,16 +7809,16 @@ export namespace Prisma {
   }
 
   export type RefreshTokenCreateWithoutUserInput = {
-    uuid?: string
-    expiresAt: Date | string
-    revoked?: boolean
+    id?: string
+    token: string
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
   export type RefreshTokenUncheckedCreateWithoutUserInput = {
-    uuid?: string
-    expiresAt: Date | string
-    revoked?: boolean
+    id?: string
+    token: string
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
@@ -7820,10 +7912,10 @@ export namespace Prisma {
     AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
     OR?: RefreshTokenScalarWhereInput[]
     NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
-    uuid?: StringFilter<"RefreshToken"> | string
+    id?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
     userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revoked?: BoolFilter<"RefreshToken"> | boolean
+    userAgent?: StringNullableFilter<"RefreshToken"> | string | null
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
   }
 
@@ -8150,9 +8242,9 @@ export namespace Prisma {
   }
 
   export type RefreshTokenCreateManyUserInput = {
-    uuid?: string
-    expiresAt: Date | string
-    revoked?: boolean
+    id?: string
+    token: string
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
@@ -8219,23 +8311,23 @@ export namespace Prisma {
   }
 
   export type RefreshTokenUpdateWithoutUserInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RefreshTokenUncheckedUpdateWithoutUserInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RefreshTokenUncheckedUpdateManyWithoutUserInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

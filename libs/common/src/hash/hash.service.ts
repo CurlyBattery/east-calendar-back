@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class HashService {
@@ -9,7 +9,7 @@ export class HashService {
     }
 
     try {
-      return bcrypt.hashSync(raw, 10);
+      return argon2.hash(raw);
     } catch (err: unknown) {
       console.log('Failed to hash ', err);
       throw new Error('Failed to hash');
@@ -22,7 +22,7 @@ export class HashService {
     }
 
     try {
-      return bcrypt.compare(raw, hashed);
+      return argon2.verify(hashed, raw);
     } catch (err: unknown) {
       console.log('Failed to verify ', err);
       throw new Error('Failed to verify');

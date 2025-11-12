@@ -132,10 +132,10 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.RefreshTokenScalarFieldEnum = {
-  uuid: 'uuid',
+  id: 'id',
+  token: 'token',
   userId: 'userId',
-  expiresAt: 'expiresAt',
-  revoked: 'revoked',
+  userAgent: 'userAgent',
   createdAt: 'createdAt'
 };
 
@@ -178,6 +178,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.TaskStatus = exports.$Enums.TaskStatus = {
   TODO: 'TODO',

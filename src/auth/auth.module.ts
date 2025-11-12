@@ -1,20 +1,17 @@
 import { Module } from '@nestjs/common';
-
-import { UserModule } from '../user/user.module';
-import { LoginUserUseCase } from './application/use-cases/login-user.use-case';
-import { RegisterUserUseCase } from './application/use-cases/register-user.use-case';
-import { TOKEN_REPOSITORY } from './application/ports/token.repository';
-import { PrismaTokenRepository } from './infrastructure/adapters/prisma-token.repository';
-import { PrismaTokenMapper } from './infrastructure/adapters/prisma-token.mapper';
 import { JwtModule } from '@nestjs/jwt';
+
 import { EnvModule, EnvService, HashModule } from '@app/common';
-import { AuthController } from './presentation/auth.controller';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
+import { AccessTokenStrategy } from './strategies/access-token.strategy';
+import { AccessTokenGuard } from './guards/access-token.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    UserModule,
-    HashModule,
     EnvModule,
+    HashModule,
     JwtModule.registerAsync({
       imports: [EnvModule],
       inject: [EnvService],
@@ -28,13 +25,12 @@ import { AuthController } from './presentation/auth.controller';
     }),
   ],
   providers: [
-    RegisterUserUseCase,
-    LoginUserUseCase,
+    AuthService,
+    AccessTokenStrategy,
     {
-      provide: TOKEN_REPOSITORY,
-      useClass: PrismaTokenRepository,
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
     },
-    PrismaTokenMapper,
   ],
   controllers: [AuthController],
 })
