@@ -78,20 +78,29 @@ enum TaskPriority {
   @@map("task_priorities")
 }
 
+enum TaskType {
+  PERSONAL
+  TEAM
+  COMPANY
+
+  @@map("task_types")
+}
+
 model Task {
   id          String       @id @default(uuid())
   createdBy   String       @map("created_by")
   title       String
-  decsription String
+  description String
   start       DateTime
   end         DateTime
   status      TaskStatus   @default(TODO)
   priority    TaskPriority @default(MEDIUM)
+  type        TaskType     @default(PERSONAL)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  User        User         @relation(references: [id], fields: [createdBy], onDelete: Cascade)
+  user        User?        @relation(references: [id], fields: [createdBy], onDelete: Cascade)
   attachments Attachment[]
 
   @@index(id)

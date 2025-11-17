@@ -6,6 +6,7 @@ import { EnvModule, envSchema, HashModule } from '@app/common';
 import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { AuthModule } from './auth/auth.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
     HashModule,
     EnvModule,
     AuthModule,
+    TaskModule,
   ],
   providers: [
     {

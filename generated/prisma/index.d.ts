@@ -60,6 +60,15 @@ export const TaskPriority: {
 
 export type TaskPriority = (typeof TaskPriority)[keyof typeof TaskPriority]
 
+
+export const TaskType: {
+  PERSONAL: 'PERSONAL',
+  TEAM: 'TEAM',
+  COMPANY: 'COMPANY'
+};
+
+export type TaskType = (typeof TaskType)[keyof typeof TaskType]
+
 }
 
 export type TaskStatus = $Enums.TaskStatus
@@ -69,6 +78,10 @@ export const TaskStatus: typeof $Enums.TaskStatus
 export type TaskPriority = $Enums.TaskPriority
 
 export const TaskPriority: typeof $Enums.TaskPriority
+
+export type TaskType = $Enums.TaskType
+
+export const TaskType: typeof $Enums.TaskType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -4197,11 +4210,12 @@ export namespace Prisma {
     id: string | null
     createdBy: string | null
     title: string | null
-    decsription: string | null
+    description: string | null
     start: Date | null
     end: Date | null
     status: $Enums.TaskStatus | null
     priority: $Enums.TaskPriority | null
+    type: $Enums.TaskType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4210,11 +4224,12 @@ export namespace Prisma {
     id: string | null
     createdBy: string | null
     title: string | null
-    decsription: string | null
+    description: string | null
     start: Date | null
     end: Date | null
     status: $Enums.TaskStatus | null
     priority: $Enums.TaskPriority | null
+    type: $Enums.TaskType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4223,11 +4238,12 @@ export namespace Prisma {
     id: number
     createdBy: number
     title: number
-    decsription: number
+    description: number
     start: number
     end: number
     status: number
     priority: number
+    type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4238,11 +4254,12 @@ export namespace Prisma {
     id?: true
     createdBy?: true
     title?: true
-    decsription?: true
+    description?: true
     start?: true
     end?: true
     status?: true
     priority?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4251,11 +4268,12 @@ export namespace Prisma {
     id?: true
     createdBy?: true
     title?: true
-    decsription?: true
+    description?: true
     start?: true
     end?: true
     status?: true
     priority?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4264,11 +4282,12 @@ export namespace Prisma {
     id?: true
     createdBy?: true
     title?: true
-    decsription?: true
+    description?: true
     start?: true
     end?: true
     status?: true
     priority?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4350,11 +4369,12 @@ export namespace Prisma {
     id: string
     createdBy: string
     title: string
-    decsription: string
+    description: string
     start: Date
     end: Date
     status: $Enums.TaskStatus
     priority: $Enums.TaskPriority
+    type: $Enums.TaskType
     createdAt: Date
     updatedAt: Date
     _count: TaskCountAggregateOutputType | null
@@ -4380,14 +4400,15 @@ export namespace Prisma {
     id?: boolean
     createdBy?: boolean
     title?: boolean
-    decsription?: boolean
+    description?: boolean
     start?: boolean
     end?: boolean
     status?: boolean
     priority?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Task$userArgs<ExtArgs>
     attachments?: boolean | Task$attachmentsArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
@@ -4396,53 +4417,56 @@ export namespace Prisma {
     id?: boolean
     createdBy?: boolean
     title?: boolean
-    decsription?: boolean
+    description?: boolean
     start?: boolean
     end?: boolean
     status?: boolean
     priority?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Task$userArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
   export type TaskSelectScalar = {
     id?: boolean
     createdBy?: boolean
     title?: boolean
-    decsription?: boolean
+    description?: boolean
     start?: boolean
     end?: boolean
     status?: boolean
     priority?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Task$userArgs<ExtArgs>
     attachments?: boolean | Task$attachmentsArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Task$userArgs<ExtArgs>
   }
 
   export type $TaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Task"
     objects: {
-      User: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       createdBy: string
       title: string
-      decsription: string
+      description: string
       start: Date
       end: Date
       status: $Enums.TaskStatus
       priority: $Enums.TaskPriority
+      type: $Enums.TaskType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["task"]>
@@ -4809,7 +4833,7 @@ export namespace Prisma {
    */
   export interface Prisma__TaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends Task$userArgs<ExtArgs> = {}>(args?: Subset<T, Task$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     attachments<T extends Task$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Task$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4843,11 +4867,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Task", 'String'>
     readonly createdBy: FieldRef<"Task", 'String'>
     readonly title: FieldRef<"Task", 'String'>
-    readonly decsription: FieldRef<"Task", 'String'>
+    readonly description: FieldRef<"Task", 'String'>
     readonly start: FieldRef<"Task", 'DateTime'>
     readonly end: FieldRef<"Task", 'DateTime'>
     readonly status: FieldRef<"Task", 'TaskStatus'>
     readonly priority: FieldRef<"Task", 'TaskPriority'>
+    readonly type: FieldRef<"Task", 'TaskType'>
     readonly createdAt: FieldRef<"Task", 'DateTime'>
     readonly updatedAt: FieldRef<"Task", 'DateTime'>
   }
@@ -5165,6 +5190,21 @@ export namespace Prisma {
      * Filter which Tasks to delete
      */
     where?: TaskWhereInput
+  }
+
+  /**
+   * Task.user
+   */
+  export type Task$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -6200,11 +6240,12 @@ export namespace Prisma {
     id: 'id',
     createdBy: 'createdBy',
     title: 'title',
-    decsription: 'decsription',
+    description: 'description',
     start: 'start',
     end: 'end',
     status: 'status',
     priority: 'priority',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6313,6 +6354,20 @@ export namespace Prisma {
    * Reference to a field of type 'TaskPriority[]'
    */
   export type ListEnumTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskPriority[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TaskType'
+   */
+  export type EnumTaskTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TaskType[]'
+   */
+  export type ListEnumTaskTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskType[]'>
     
 
 
@@ -6521,14 +6576,15 @@ export namespace Prisma {
     id?: StringFilter<"Task"> | string
     createdBy?: StringFilter<"Task"> | string
     title?: StringFilter<"Task"> | string
-    decsription?: StringFilter<"Task"> | string
+    description?: StringFilter<"Task"> | string
     start?: DateTimeFilter<"Task"> | Date | string
     end?: DateTimeFilter<"Task"> | Date | string
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    type?: EnumTaskTypeFilter<"Task"> | $Enums.TaskType
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
-    User?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     attachments?: AttachmentListRelationFilter
   }
 
@@ -6536,14 +6592,15 @@ export namespace Prisma {
     id?: SortOrder
     createdBy?: SortOrder
     title?: SortOrder
-    decsription?: SortOrder
+    description?: SortOrder
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    User?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     attachments?: AttachmentOrderByRelationAggregateInput
   }
 
@@ -6554,14 +6611,15 @@ export namespace Prisma {
     NOT?: TaskWhereInput | TaskWhereInput[]
     createdBy?: StringFilter<"Task"> | string
     title?: StringFilter<"Task"> | string
-    decsription?: StringFilter<"Task"> | string
+    description?: StringFilter<"Task"> | string
     start?: DateTimeFilter<"Task"> | Date | string
     end?: DateTimeFilter<"Task"> | Date | string
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    type?: EnumTaskTypeFilter<"Task"> | $Enums.TaskType
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
-    User?: XOR<UserRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     attachments?: AttachmentListRelationFilter
   }, "id">
 
@@ -6569,11 +6627,12 @@ export namespace Prisma {
     id?: SortOrder
     createdBy?: SortOrder
     title?: SortOrder
-    decsription?: SortOrder
+    description?: SortOrder
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TaskCountOrderByAggregateInput
@@ -6588,11 +6647,12 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Task"> | string
     createdBy?: StringWithAggregatesFilter<"Task"> | string
     title?: StringWithAggregatesFilter<"Task"> | string
-    decsription?: StringWithAggregatesFilter<"Task"> | string
+    description?: StringWithAggregatesFilter<"Task"> | string
     start?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     end?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     status?: EnumTaskStatusWithAggregatesFilter<"Task"> | $Enums.TaskStatus
     priority?: EnumTaskPriorityWithAggregatesFilter<"Task"> | $Enums.TaskPriority
+    type?: EnumTaskTypeWithAggregatesFilter<"Task"> | $Enums.TaskType
     createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
   }
@@ -6852,14 +6912,15 @@ export namespace Prisma {
   export type TaskCreateInput = {
     id?: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
-    User: UserCreateNestedOneWithoutTasksInput
+    user?: UserCreateNestedOneWithoutTasksInput
     attachments?: AttachmentCreateNestedManyWithoutTaskInput
   }
 
@@ -6867,11 +6928,12 @@ export namespace Prisma {
     id?: string
     createdBy: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTaskInput
@@ -6880,14 +6942,15 @@ export namespace Prisma {
   export type TaskUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    User?: UserUpdateOneRequiredWithoutTasksNestedInput
+    user?: UserUpdateOneWithoutTasksNestedInput
     attachments?: AttachmentUpdateManyWithoutTaskNestedInput
   }
 
@@ -6895,11 +6958,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdBy?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attachments?: AttachmentUncheckedUpdateManyWithoutTaskNestedInput
@@ -6909,11 +6973,12 @@ export namespace Prisma {
     id?: string
     createdBy: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6921,11 +6986,12 @@ export namespace Prisma {
   export type TaskUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6934,11 +7000,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdBy?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7241,6 +7308,18 @@ export namespace Prisma {
     not?: NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
   }
 
+  export type EnumTaskTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskType | EnumTaskTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskTypeFilter<$PrismaModel> | $Enums.TaskType
+  }
+
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type AttachmentListRelationFilter = {
     every?: AttachmentWhereInput
     some?: AttachmentWhereInput
@@ -7255,11 +7334,12 @@ export namespace Prisma {
     id?: SortOrder
     createdBy?: SortOrder
     title?: SortOrder
-    decsription?: SortOrder
+    description?: SortOrder
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7268,11 +7348,12 @@ export namespace Prisma {
     id?: SortOrder
     createdBy?: SortOrder
     title?: SortOrder
-    decsription?: SortOrder
+    description?: SortOrder
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7281,11 +7362,12 @@ export namespace Prisma {
     id?: SortOrder
     createdBy?: SortOrder
     title?: SortOrder
-    decsription?: SortOrder
+    description?: SortOrder
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
     priority?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7308,6 +7390,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTaskPriorityFilter<$PrismaModel>
     _max?: NestedEnumTaskPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumTaskTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskType | EnumTaskTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskTypeWithAggregatesFilter<$PrismaModel> | $Enums.TaskType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTaskTypeFilter<$PrismaModel>
+    _max?: NestedEnumTaskTypeFilter<$PrismaModel>
   }
 
   export type TaskRelationFilter = {
@@ -7540,10 +7632,16 @@ export namespace Prisma {
     set?: $Enums.TaskPriority
   }
 
-  export type UserUpdateOneRequiredWithoutTasksNestedInput = {
+  export type EnumTaskTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TaskType
+  }
+
+  export type UserUpdateOneWithoutTasksNestedInput = {
     create?: XOR<UserCreateWithoutTasksInput, UserUncheckedCreateWithoutTasksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTasksInput
     upsert?: UserUpsertWithoutTasksInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTasksInput, UserUpdateWithoutTasksInput>, UserUncheckedUpdateWithoutTasksInput>
   }
@@ -7726,6 +7824,13 @@ export namespace Prisma {
     not?: NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
   }
 
+  export type NestedEnumTaskTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskType | EnumTaskTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskTypeFilter<$PrismaModel> | $Enums.TaskType
+  }
+
   export type NestedEnumTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
@@ -7746,14 +7851,25 @@ export namespace Prisma {
     _max?: NestedEnumTaskPriorityFilter<$PrismaModel>
   }
 
+  export type NestedEnumTaskTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskType | EnumTaskTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskType[] | ListEnumTaskTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskTypeWithAggregatesFilter<$PrismaModel> | $Enums.TaskType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTaskTypeFilter<$PrismaModel>
+    _max?: NestedEnumTaskTypeFilter<$PrismaModel>
+  }
+
   export type TaskCreateWithoutUserInput = {
     id?: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
     attachments?: AttachmentCreateNestedManyWithoutTaskInput
@@ -7762,11 +7878,12 @@ export namespace Prisma {
   export type TaskUncheckedCreateWithoutUserInput = {
     id?: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
     attachments?: AttachmentUncheckedCreateNestedManyWithoutTaskInput
@@ -7855,11 +7972,12 @@ export namespace Prisma {
     id?: StringFilter<"Task"> | string
     createdBy?: StringFilter<"Task"> | string
     title?: StringFilter<"Task"> | string
-    decsription?: StringFilter<"Task"> | string
+    description?: StringFilter<"Task"> | string
     start?: DateTimeFilter<"Task"> | Date | string
     end?: DateTimeFilter<"Task"> | Date | string
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    type?: EnumTaskTypeFilter<"Task"> | $Enums.TaskType
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
   }
@@ -8156,25 +8274,27 @@ export namespace Prisma {
   export type TaskCreateWithoutAttachmentsInput = {
     id?: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
-    User: UserCreateNestedOneWithoutTasksInput
+    user?: UserCreateNestedOneWithoutTasksInput
   }
 
   export type TaskUncheckedCreateWithoutAttachmentsInput = {
     id?: string
     createdBy: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8198,25 +8318,27 @@ export namespace Prisma {
   export type TaskUpdateWithoutAttachmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    User?: UserUpdateOneRequiredWithoutTasksNestedInput
+    user?: UserUpdateOneWithoutTasksNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutAttachmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdBy?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8224,11 +8346,12 @@ export namespace Prisma {
   export type TaskCreateManyUserInput = {
     id?: string
     title: string
-    decsription: string
+    description: string
     start: Date | string
     end: Date | string
     status?: $Enums.TaskStatus
     priority?: $Enums.TaskPriority
+    type?: $Enums.TaskType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8251,11 +8374,12 @@ export namespace Prisma {
   export type TaskUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attachments?: AttachmentUpdateManyWithoutTaskNestedInput
@@ -8264,11 +8388,12 @@ export namespace Prisma {
   export type TaskUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attachments?: AttachmentUncheckedUpdateManyWithoutTaskNestedInput
@@ -8277,11 +8402,12 @@ export namespace Prisma {
   export type TaskUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    decsription?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    type?: EnumTaskTypeFieldUpdateOperationsInput | $Enums.TaskType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

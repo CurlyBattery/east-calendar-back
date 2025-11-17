@@ -7,11 +7,13 @@ import { AuthController } from './auth.controller';
 import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { AccessTokenGuard } from './guards/access-token.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
     EnvModule,
     HashModule,
+    UserModule,
     JwtModule.registerAsync({
       imports: [EnvModule],
       inject: [EnvService],
