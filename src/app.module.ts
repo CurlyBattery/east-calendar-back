@@ -8,7 +8,6 @@ import { ZodValidationPipe } from 'nestjs-zod';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 import { ProjectModule } from './project/project.module';
-import { ProjectMemberModule } from './project-member/project-member.module';
 
 @Module({
   imports: [
@@ -23,7 +22,6 @@ import { ProjectMemberModule } from './project-member/project-member.module';
     AuthModule,
     TaskModule,
     ProjectModule,
-    ProjectMemberModule,
   ],
   providers: [
     {
