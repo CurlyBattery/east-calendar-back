@@ -61,6 +61,14 @@ export namespace $Enums {
 export type SubscriptionPlan = (typeof SubscriptionPlan)[keyof typeof SubscriptionPlan]
 
 
+export const RoleUser: {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+export type RoleUser = (typeof RoleUser)[keyof typeof RoleUser]
+
+
 export const RoleMember: {
   OWNER: 'OWNER',
   MEMBER: 'MEMBER',
@@ -101,6 +109,10 @@ export type TaskType = (typeof TaskType)[keyof typeof TaskType]
 export type SubscriptionPlan = $Enums.SubscriptionPlan
 
 export const SubscriptionPlan: typeof $Enums.SubscriptionPlan
+
+export type RoleUser = $Enums.RoleUser
+
+export const RoleUser: typeof $Enums.RoleUser
 
 export type RoleMember = $Enums.RoleMember
 
@@ -1591,6 +1603,7 @@ export namespace Prisma {
     avatarUrl: string | null
     name: string | null
     plan: $Enums.SubscriptionPlan | null
+    role: $Enums.RoleUser | null
     createdAt: Date | null
   }
 
@@ -1601,6 +1614,7 @@ export namespace Prisma {
     avatarUrl: string | null
     name: string | null
     plan: $Enums.SubscriptionPlan | null
+    role: $Enums.RoleUser | null
     createdAt: Date | null
   }
 
@@ -1611,6 +1625,7 @@ export namespace Prisma {
     avatarUrl: number
     name: number
     plan: number
+    role: number
     createdAt: number
     _all: number
   }
@@ -1623,6 +1638,7 @@ export namespace Prisma {
     avatarUrl?: true
     name?: true
     plan?: true
+    role?: true
     createdAt?: true
   }
 
@@ -1633,6 +1649,7 @@ export namespace Prisma {
     avatarUrl?: true
     name?: true
     plan?: true
+    role?: true
     createdAt?: true
   }
 
@@ -1643,6 +1660,7 @@ export namespace Prisma {
     avatarUrl?: true
     name?: true
     plan?: true
+    role?: true
     createdAt?: true
     _all?: true
   }
@@ -1726,6 +1744,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan: $Enums.SubscriptionPlan
+    role: $Enums.RoleUser
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1753,6 +1772,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     name?: boolean
     plan?: boolean
+    role?: boolean
     createdAt?: boolean
     createdTasks?: boolean | User$createdTasksArgs<ExtArgs>
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
@@ -1770,6 +1790,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     name?: boolean
     plan?: boolean
+    role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1780,6 +1801,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     name?: boolean
     plan?: boolean
+    role?: boolean
     createdAt?: boolean
   }
 
@@ -1811,6 +1833,7 @@ export namespace Prisma {
       avatarUrl: string
       name: string
       plan: $Enums.SubscriptionPlan
+      role: $Enums.RoleUser
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2217,6 +2240,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly plan: FieldRef<"User", 'SubscriptionPlan'>
+    readonly role: FieldRef<"User", 'RoleUser'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -8517,6 +8541,7 @@ export namespace Prisma {
     avatarUrl: 'avatarUrl',
     name: 'name',
     plan: 'plan',
+    role: 'role',
     createdAt: 'createdAt'
   };
 
@@ -8656,6 +8681,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'RoleUser'
+   */
+  export type EnumRoleUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleUser'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoleUser[]'
+   */
+  export type ListEnumRoleUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleUser[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -8759,6 +8798,7 @@ export namespace Prisma {
     avatarUrl?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     plan?: EnumSubscriptionPlanFilter<"User"> | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     createdAt?: DateTimeFilter<"User"> | Date | string
     createdTasks?: TaskListRelationFilter
     assignedTasks?: TaskListRelationFilter
@@ -8775,6 +8815,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     name?: SortOrder
     plan?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     createdTasks?: TaskOrderByRelationAggregateInput
     assignedTasks?: TaskOrderByRelationAggregateInput
@@ -8794,6 +8835,7 @@ export namespace Prisma {
     avatarUrl?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     plan?: EnumSubscriptionPlanFilter<"User"> | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     createdAt?: DateTimeFilter<"User"> | Date | string
     createdTasks?: TaskListRelationFilter
     assignedTasks?: TaskListRelationFilter
@@ -8810,6 +8852,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     name?: SortOrder
     plan?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -8826,6 +8869,7 @@ export namespace Prisma {
     avatarUrl?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
     plan?: EnumSubscriptionPlanWithAggregatesFilter<"User"> | $Enums.SubscriptionPlan
+    role?: EnumRoleUserWithAggregatesFilter<"User"> | $Enums.RoleUser
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -9230,6 +9274,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
@@ -9246,6 +9291,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -9262,6 +9308,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
@@ -9278,6 +9325,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -9294,6 +9342,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
   }
 
@@ -9304,6 +9353,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9314,6 +9364,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9741,6 +9792,13 @@ export namespace Prisma {
     not?: NestedEnumSubscriptionPlanFilter<$PrismaModel> | $Enums.SubscriptionPlan
   }
 
+  export type EnumRoleUserFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleUser | EnumRoleUserFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleUserFilter<$PrismaModel> | $Enums.RoleUser
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9809,6 +9867,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     name?: SortOrder
     plan?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9819,6 +9878,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     name?: SortOrder
     plan?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9829,6 +9889,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     name?: SortOrder
     plan?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9858,6 +9919,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
     _max?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
+  }
+
+  export type EnumRoleUserWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleUser | EnumRoleUserFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleUserWithAggregatesFilter<$PrismaModel> | $Enums.RoleUser
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleUserFilter<$PrismaModel>
+    _max?: NestedEnumRoleUserFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10294,6 +10365,10 @@ export namespace Prisma {
 
   export type EnumSubscriptionPlanFieldUpdateOperationsInput = {
     set?: $Enums.SubscriptionPlan
+  }
+
+  export type EnumRoleUserFieldUpdateOperationsInput = {
+    set?: $Enums.RoleUser
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -10769,6 +10844,13 @@ export namespace Prisma {
     not?: NestedEnumSubscriptionPlanFilter<$PrismaModel> | $Enums.SubscriptionPlan
   }
 
+  export type NestedEnumRoleUserFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleUser | EnumRoleUserFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleUserFilter<$PrismaModel> | $Enums.RoleUser
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10816,6 +10898,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
     _max?: NestedEnumSubscriptionPlanFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRoleUserWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleUser | EnumRoleUserFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleUser[] | ListEnumRoleUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleUserWithAggregatesFilter<$PrismaModel> | $Enums.RoleUser
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleUserFilter<$PrismaModel>
+    _max?: NestedEnumRoleUserFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11305,6 +11397,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
@@ -11320,6 +11413,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -11351,6 +11445,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
@@ -11366,6 +11461,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -11381,6 +11477,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
@@ -11396,6 +11493,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -11491,6 +11589,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
@@ -11506,6 +11605,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -11576,6 +11676,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
@@ -11591,6 +11692,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -11651,6 +11753,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
@@ -11666,6 +11769,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -11681,6 +11785,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
@@ -11696,6 +11801,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -11727,6 +11833,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
@@ -11742,6 +11849,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -11780,6 +11888,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -11795,6 +11904,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -11815,6 +11925,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -11830,6 +11941,7 @@ export namespace Prisma {
     avatarUrl: string
     name: string
     plan?: $Enums.SubscriptionPlan
+    role?: $Enums.RoleUser
     createdAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -11916,6 +12028,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -11931,6 +12044,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -11957,6 +12071,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -11972,6 +12087,7 @@ export namespace Prisma {
     avatarUrl?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput

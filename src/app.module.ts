@@ -8,6 +8,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 import { ProjectModule } from './project/project.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProjectModule } from './project/project.module';
       isGlobal: true,
     }),
     PrismaModule,
+    SeedModule,
     UserModule,
     HashModule,
     EnvModule,

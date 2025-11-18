@@ -129,6 +129,7 @@ exports.Prisma.UserScalarFieldEnum = {
   avatarUrl: 'avatarUrl',
   name: 'name',
   plan: 'plan',
+  role: 'role',
   createdAt: 'createdAt'
 };
 
@@ -206,6 +207,11 @@ exports.Prisma.NullsOrder = {
 exports.SubscriptionPlan = exports.$Enums.SubscriptionPlan = {
   FREE: 'FREE',
   PRO: 'PRO'
+};
+
+exports.RoleUser = exports.$Enums.RoleUser = {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
 };
 
 exports.RoleMember = exports.$Enums.RoleMember = {

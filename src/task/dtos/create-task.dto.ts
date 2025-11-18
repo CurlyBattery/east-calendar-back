@@ -7,6 +7,7 @@ export const CreateTaskSchema = z.object({
   start: z.coerce.date(),
   end: z.coerce.date(),
   projectId: z.string(),
+  assigneeId: z.string().optional(),
 });
 
 export class CreateTaskDto extends createZodDto(CreateTaskSchema) {}

@@ -35,7 +35,14 @@ export class ProjectService {
   getAllMyProjects(userId: string) {
     return this.prisma.project.findMany({
       where: {
-        ownerId: userId,
+        projectMembers: {
+          some: {
+            userId,
+          },
+        },
+      },
+      include: {
+        owner: true,
       },
     });
   }
@@ -90,6 +97,14 @@ export class ProjectService {
         projectId,
         userId: dto.userId,
         role: dto.role,
+      },
+    });
+  }
+
+  findAllMembers(projectId: string) {
+    return this.prisma.projectMember.findMany({
+      where: {
+        projectId,
       },
     });
   }

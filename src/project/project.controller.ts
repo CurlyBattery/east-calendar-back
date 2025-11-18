@@ -49,6 +49,11 @@ export class ProjectController {
     return this.projectService.addMember(projectId, addMemberDto, user.id);
   }
 
+  @Get(':id/members')
+  getAllMembers(@Param('id') projectId: string) {
+    return this.projectService.findAllMembers(projectId);
+  }
+
   @UseGuards(SubscriptionGuard)
   @Patch(':id/members')
   updateMember(

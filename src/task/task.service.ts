@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { UpdateTaskDto } from './dtos/update-task.dto';
@@ -7,7 +11,29 @@ import { UpdateTaskDto } from './dtos/update-task.dto';
 export class TaskService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreateTaskDto, userId: string) {
+  async create(dto: CreateTaskDto, userId: string) {
+    const project = await this.prisma.project.findUnique({
+      where: { id: dto.projectId },
+      include: { projectMembers: true },
+    });
+
+    if (!project) {
+      throw new NotFoundException('Project not found');
+    }
+
+    if (dto?.assigneeId) {
+      if (
+        !project.projectMembers.some(
+          (member) => member.userId === dto?.assigneeId,
+        )
+      ) {
+        throw new ForbiddenException('Member not found in project');
+      }
+    } else {
+      if (!project.projectMembers.some((member) => member.userId === userId)) {
+        throw new ForbiddenException('Member not found in project');
+      }
+    }
     return this.prisma.task.create({
       data: {
         title: dto.title,

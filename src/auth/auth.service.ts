@@ -3,15 +3,9 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { addSeconds, isBefore } from 'date-fns';
 import { JwtService } from '@nestjs/jwt';
 
-import {
-  convertExpToSecond,
-  EnvService,
-  ExpType,
-  HashService,
-} from '@app/common';
+import { HashService } from '@app/common';
 import { User } from '../../generated/prisma';
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';

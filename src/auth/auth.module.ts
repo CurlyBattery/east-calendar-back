@@ -8,6 +8,7 @@ import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { AccessTokenGuard } from './guards/access-token.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from '../user/user.module';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
@@ -32,6 +33,10 @@ import { UserModule } from '../user/user.module';
     {
       provide: APP_GUARD,
       useClass: AccessTokenGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
   controllers: [AuthController],
