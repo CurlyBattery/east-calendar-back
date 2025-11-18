@@ -15,6 +15,7 @@ export class TaskService {
         start: dto.start,
         end: dto.end,
         createdBy: userId,
+        projectId: dto.projectId,
       },
     });
   }

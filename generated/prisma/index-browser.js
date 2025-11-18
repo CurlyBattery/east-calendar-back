@@ -128,6 +128,7 @@ exports.Prisma.UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarUrl: 'avatarUrl',
   name: 'name',
+  plan: 'plan',
   createdAt: 'createdAt'
 };
 
@@ -137,6 +138,21 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   userId: 'userId',
   userAgent: 'userAgent',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProjectMemberScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  userId: 'userId',
+  role: 'role'
 };
 
 exports.Prisma.NotificationScalarFieldEnum = {
@@ -150,7 +166,9 @@ exports.Prisma.NotificationScalarFieldEnum = {
 
 exports.Prisma.TaskScalarFieldEnum = {
   id: 'id',
+  projectId: 'projectId',
   createdBy: 'createdBy',
+  assigneeId: 'assigneeId',
   title: 'title',
   description: 'description',
   start: 'start',
@@ -185,6 +203,17 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.SubscriptionPlan = exports.$Enums.SubscriptionPlan = {
+  FREE: 'FREE',
+  PRO: 'PRO'
+};
+
+exports.RoleMember = exports.$Enums.RoleMember = {
+  OWNER: 'OWNER',
+  MEMBER: 'MEMBER',
+  VIEWER: 'VIEWER'
+};
+
 exports.TaskStatus = exports.$Enums.TaskStatus = {
   TODO: 'TODO',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -206,6 +235,8 @@ exports.TaskType = exports.$Enums.TaskType = {
 exports.Prisma.ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
+  Project: 'Project',
+  ProjectMember: 'ProjectMember',
   Notification: 'Notification',
   Task: 'Task',
   Attachment: 'Attachment'
