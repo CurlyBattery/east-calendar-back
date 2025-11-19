@@ -21,7 +21,10 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(dto: RegisterDto, userAgent: string): Promise<Tokens> {
+  async register(
+    dto: RegisterDto,
+    userAgent: string,
+  ): Promise<Tokens & { user: User }> {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -46,10 +49,14 @@ export class AuthService {
     return {
       accessToken,
       refreshToken,
+      user: newUser,
     };
   }
 
-  async login(dto: LoginDto, userAgent: string): Promise<Tokens> {
+  async login(
+    dto: LoginDto,
+    userAgent: string,
+  ): Promise<Tokens & { user: User }> {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -66,6 +73,7 @@ export class AuthService {
     return {
       accessToken,
       refreshToken,
+      user,
     };
   }
 

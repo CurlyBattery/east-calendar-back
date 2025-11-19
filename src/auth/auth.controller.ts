@@ -39,16 +39,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
     @UserAgent() userAgent: string,
   ) {
-    const { accessToken, refreshToken } = await this.authService.register(
+    const { accessToken, refreshToken, user } = await this.authService.register(
       dto,
       userAgent,
     );
 
     this.setTokensToCookie(req, res, accessToken, refreshToken);
 
-    return {
-      accessToken,
-    };
+    return user;
   }
 
   @Public()
@@ -60,16 +58,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
     @UserAgent() userAgent: string,
   ) {
-    const { accessToken, refreshToken } = await this.authService.login(
+    const { accessToken, refreshToken, user } = await this.authService.login(
       dto,
       userAgent,
     );
 
     this.setTokensToCookie(req, res, accessToken, refreshToken);
 
-    return {
-      accessToken,
-    };
+    return user;
   }
 
   @Post('logout')
