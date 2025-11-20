@@ -79,6 +79,13 @@ export class ProjectService {
       throw new ForbiddenException();
     }
 
+    const existsUser = await this.prisma.user.findUnique({
+      where: { id: dto.userId },
+    });
+    if (!existsUser) {
+      throw new NotFoundException('User not found');
+    }
+
     const existsProjectMember = await this.prisma.projectMember.findUnique({
       where: {
         projectId_userId: {

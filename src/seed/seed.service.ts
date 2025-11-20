@@ -3,7 +3,7 @@ import * as argon2 from 'argon2';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { HashService } from '@app/common';
-import { RoleUser } from '../../generated/prisma';
+import { RoleUser, SubscriptionPlan } from '../../generated/prisma';
 
 @Injectable()
 export class SeedService implements OnModuleInit {
@@ -26,6 +26,7 @@ export class SeedService implements OnModuleInit {
       name: 'Rar',
       avatarUrl: 'rfgbreb',
       role: RoleUser.ADMIN,
+      plan: SubscriptionPlan.PRO,
     };
 
     await this.prisma.user.upsert({
