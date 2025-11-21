@@ -10,8 +10,8 @@ import {
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { UpdateTaskDto } from './dtos/update-task.dto';
-import { CurrentUser } from '@app/common';
-import { User } from '../../generated/prisma';
+import { CurrentUser, Roles } from '@app/common';
+import { RoleUser, User } from '../../generated/prisma';
 
 @Controller('tasks')
 export class TaskController {
@@ -22,9 +22,23 @@ export class TaskController {
     return this.taskService.create(createTaskDto, user.id);
   }
 
+  @Roles(RoleUser.ADMIN)
   @Get()
   findAll() {
     return this.taskService.findAll();
+  }
+
+  // @Get('my')
+  // findAllMy(@CurrentUser() user: User) {
+  //   return this.taskService.findAllMy();
+  // }
+
+  @Get('my/:id')
+  findAllMyByProject(
+    @Param('id') projectId: string,
+    @CurrentUser() user: User,
+  ) {
+    return this.taskService.findAllMyByProject(projectId, user.id);
   }
 
   @Get(':id')

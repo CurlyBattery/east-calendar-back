@@ -38,16 +38,31 @@ export class TaskService {
       data: {
         title: dto.title,
         description: dto.description,
+        priority: dto.priority,
+        assigneeId: dto.assigneeId ?? userId,
         start: dto.start,
         end: dto.end,
         createdBy: userId,
         projectId: dto.projectId,
+      },
+      include: {
+        assignee: true,
       },
     });
   }
 
   findAll() {
     return this.prisma.task.findMany();
+  }
+
+  findAllMyByProject(projectId: string, userId: string) {
+    return this.prisma.task.findMany({
+      where: { projectId: projectId, assigneeId: userId },
+      include: {
+        assignee: true,
+        creator: true,
+      },
+    });
   }
 
   async findOne(id: string) {

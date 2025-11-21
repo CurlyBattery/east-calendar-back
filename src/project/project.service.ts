@@ -51,7 +51,11 @@ export class ProjectService {
     const project = await this.prisma.project.findUnique({
       where: { id },
       include: {
-        projectMembers: true,
+        projectMembers: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     if (!project) {

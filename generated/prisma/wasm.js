@@ -223,6 +223,7 @@ exports.RoleMember = exports.$Enums.RoleMember = {
 exports.TaskStatus = exports.$Enums.TaskStatus = {
   TODO: 'TODO',
   IN_PROGRESS: 'IN_PROGRESS',
+  CHECKING: 'CHECKING',
   DONE: 'DONE'
 };
 

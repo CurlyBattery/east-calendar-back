@@ -112,6 +112,7 @@ model Notification {
 enum TaskStatus {
   TODO
   IN_PROGRESS
+  CHECKING
   DONE
 
   @@map("task_statuses")
