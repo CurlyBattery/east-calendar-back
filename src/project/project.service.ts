@@ -113,6 +113,9 @@ export class ProjectService {
       where: {
         projectId,
       },
+      include: {
+        user: true,
+      },
     });
   }
 
