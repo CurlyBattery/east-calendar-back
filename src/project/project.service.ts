@@ -29,6 +29,9 @@ export class ProjectService {
           },
         },
       },
+      include: {
+        owner: true
+      }
     });
   }
 

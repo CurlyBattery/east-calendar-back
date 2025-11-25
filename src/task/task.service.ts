@@ -47,12 +47,20 @@ export class TaskService {
       },
       include: {
         assignee: true,
+        creator: true,
+        project: true,
       },
     });
   }
 
   findAll() {
-    return this.prisma.task.findMany();
+    return this.prisma.task.findMany({
+      include: {
+        assignee: true,
+        creator: true,
+        project: true,
+      },
+    });
   }
 
   findAllMyByProject(projectId: string, userId: string) {
@@ -68,6 +76,11 @@ export class TaskService {
   async findOne(id: string) {
     const task = await this.prisma.task.findUnique({
       where: { id },
+      include: {
+        assignee: true,
+        creator: true,
+        project: true,
+      },
     });
     if (!task) {
       throw new NotFoundException('Task not found');
