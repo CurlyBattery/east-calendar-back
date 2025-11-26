@@ -32,6 +32,7 @@ model User {
   refreshTokens  RefreshToken[]
   projects       Project[]       @relation("OwnedProjects")
   projectMembers ProjectMember[]
+  payment        Payment[]
 
   @@index(id)
   @@index(email)
@@ -173,4 +174,18 @@ model Attachment {
 
   @@index(id)
   @@map("attachments")
+}
+
+model Payment {
+  id        String @id @default(uuid())
+  userId    String
+  paymentId String
+  status    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@map("payments")
 }

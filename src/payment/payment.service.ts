@@ -6,10 +6,15 @@ import {
   YookassaService,
 } from 'nestjs-yookassa';
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { SubscriptionPlan } from '../../generated/prisma';
 
 @Injectable()
 export class PaymentService {
-  constructor(private readonly yookassaService: YookassaService) {}
+  constructor(
+    private readonly yookassaService: YookassaService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   async createPayment(userId: string) {
     const paymentData: CreatePaymentRequest = {
@@ -31,8 +36,40 @@ export class PaymentService {
       },
     };
 
-    const newPayment = await this.yookassaService.payments.create(paymentData);
+    const payment = await this.yookassaService.payments.create(paymentData);
+    console.log(payment.id);
 
-    return newPayment;
+    await this.prisma.payment.create({
+      data: {
+        userId,
+        paymentId: payment.id,
+        status: payment.status,
+      },
+    });
+
+    return payment;
+  }
+
+  async capturePayment(userId: string) {
+    const dbPayment = await this.prisma.payment.findFirst({
+      where: { userId },
+    });
+
+    if (!dbPayment) throw new Error('Payment not found');
+
+    const result = await this.yookassaService.payments.capture(
+      dbPayment.paymentId,
+    );
+
+    if (result.status === 'succeeded') {
+      await this.prisma.user.update({
+        where: { id: userId },
+        data: {
+          plan: SubscriptionPlan.PRO,
+        },
+      });
+    }
+
+    return result;
   }
 }

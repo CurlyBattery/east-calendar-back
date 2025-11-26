@@ -190,6 +190,15 @@ exports.Prisma.AttachmentScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paymentId: 'paymentId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -246,7 +255,8 @@ exports.Prisma.ModelName = {
   ProjectMember: 'ProjectMember',
   Notification: 'Notification',
   Task: 'Task',
-  Attachment: 'Attachment'
+  Attachment: 'Attachment',
+  Payment: 'Payment'
 };
 
 /**

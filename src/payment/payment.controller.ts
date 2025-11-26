@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CurrentUser } from '@app/common';
 import { User } from '../../generated/prisma';
@@ -10,5 +10,10 @@ export class PaymentController {
   @Post()
   create(@CurrentUser() user: User) {
     return this.paymentService.createPayment(user.id);
+  }
+
+  @Get()
+  checkStatus(@CurrentUser() user: User) {
+    return this.paymentService.capturePayment(user.id);
   }
 }
