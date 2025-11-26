@@ -24,7 +24,6 @@ export class SeedService implements OnModuleInit {
       email: 'rar@gmail.com',
       passwordHash,
       name: 'Rar',
-      avatarUrl: 'rfgbreb',
       role: RoleUser.ADMIN,
       plan: SubscriptionPlan.PRO,
     };

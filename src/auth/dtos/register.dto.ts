@@ -5,7 +5,7 @@ export const RegisterSchema = z.object({
   email: z.string(),
   password: z.string(),
   name: z.string(),
-  avatarUrl: z.string(),
+  avatarPath: z.string().optional(),
 });
 
 export class RegisterDto extends createZodDto(RegisterSchema) {}

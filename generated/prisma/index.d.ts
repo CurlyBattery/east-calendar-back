@@ -1601,7 +1601,7 @@ export namespace Prisma {
     id: string | null
     email: string | null
     passwordHash: string | null
-    avatarUrl: string | null
+    avatarPath: string | null
     name: string | null
     plan: $Enums.SubscriptionPlan | null
     role: $Enums.RoleUser | null
@@ -1612,7 +1612,7 @@ export namespace Prisma {
     id: string | null
     email: string | null
     passwordHash: string | null
-    avatarUrl: string | null
+    avatarPath: string | null
     name: string | null
     plan: $Enums.SubscriptionPlan | null
     role: $Enums.RoleUser | null
@@ -1623,7 +1623,7 @@ export namespace Prisma {
     id: number
     email: number
     passwordHash: number
-    avatarUrl: number
+    avatarPath: number
     name: number
     plan: number
     role: number
@@ -1636,7 +1636,7 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
-    avatarUrl?: true
+    avatarPath?: true
     name?: true
     plan?: true
     role?: true
@@ -1647,7 +1647,7 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
-    avatarUrl?: true
+    avatarPath?: true
     name?: true
     plan?: true
     role?: true
@@ -1658,7 +1658,7 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
-    avatarUrl?: true
+    avatarPath?: true
     name?: true
     plan?: true
     role?: true
@@ -1742,7 +1742,7 @@ export namespace Prisma {
     id: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath: string | null
     name: string
     plan: $Enums.SubscriptionPlan
     role: $Enums.RoleUser
@@ -1770,7 +1770,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
-    avatarUrl?: boolean
+    avatarPath?: boolean
     name?: boolean
     plan?: boolean
     role?: boolean
@@ -1788,7 +1788,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
-    avatarUrl?: boolean
+    avatarPath?: boolean
     name?: boolean
     plan?: boolean
     role?: boolean
@@ -1799,7 +1799,7 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
-    avatarUrl?: boolean
+    avatarPath?: boolean
     name?: boolean
     plan?: boolean
     role?: boolean
@@ -1831,7 +1831,7 @@ export namespace Prisma {
       id: string
       email: string
       passwordHash: string
-      avatarUrl: string
+      avatarPath: string | null
       name: string
       plan: $Enums.SubscriptionPlan
       role: $Enums.RoleUser
@@ -2238,7 +2238,7 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
-    readonly avatarUrl: FieldRef<"User", 'String'>
+    readonly avatarPath: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly plan: FieldRef<"User", 'SubscriptionPlan'>
     readonly role: FieldRef<"User", 'RoleUser'>
@@ -8539,7 +8539,7 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     passwordHash: 'passwordHash',
-    avatarUrl: 'avatarUrl',
+    avatarPath: 'avatarPath',
     name: 'name',
     plan: 'plan',
     role: 'role',
@@ -8796,7 +8796,7 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     passwordHash?: StringFilter<"User"> | string
-    avatarUrl?: StringFilter<"User"> | string
+    avatarPath?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     plan?: EnumSubscriptionPlanFilter<"User"> | $Enums.SubscriptionPlan
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
@@ -8813,7 +8813,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    avatarUrl?: SortOrder
+    avatarPath?: SortOrderInput | SortOrder
     name?: SortOrder
     plan?: SortOrder
     role?: SortOrder
@@ -8833,7 +8833,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     passwordHash?: StringFilter<"User"> | string
-    avatarUrl?: StringFilter<"User"> | string
+    avatarPath?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     plan?: EnumSubscriptionPlanFilter<"User"> | $Enums.SubscriptionPlan
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
@@ -8850,7 +8850,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    avatarUrl?: SortOrder
+    avatarPath?: SortOrderInput | SortOrder
     name?: SortOrder
     plan?: SortOrder
     role?: SortOrder
@@ -8867,7 +8867,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     passwordHash?: StringWithAggregatesFilter<"User"> | string
-    avatarUrl?: StringWithAggregatesFilter<"User"> | string
+    avatarPath?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringWithAggregatesFilter<"User"> | string
     plan?: EnumSubscriptionPlanWithAggregatesFilter<"User"> | $Enums.SubscriptionPlan
     role?: EnumRoleUserWithAggregatesFilter<"User"> | $Enums.RoleUser
@@ -9272,7 +9272,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -9289,7 +9289,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -9306,7 +9306,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -9323,7 +9323,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -9340,7 +9340,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -9351,7 +9351,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -9362,7 +9362,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -9786,6 +9786,21 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type EnumSubscriptionPlanFilter<$PrismaModel = never> = {
     equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
     in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
@@ -9841,6 +9856,11 @@ export namespace Prisma {
     none?: ProjectMemberWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type TaskOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -9865,7 +9885,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    avatarUrl?: SortOrder
+    avatarPath?: SortOrder
     name?: SortOrder
     plan?: SortOrder
     role?: SortOrder
@@ -9876,7 +9896,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    avatarUrl?: SortOrder
+    avatarPath?: SortOrder
     name?: SortOrder
     plan?: SortOrder
     role?: SortOrder
@@ -9887,7 +9907,7 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
-    avatarUrl?: SortOrder
+    avatarPath?: SortOrder
     name?: SortOrder
     plan?: SortOrder
     role?: SortOrder
@@ -9910,6 +9930,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumSubscriptionPlanWithAggregatesFilter<$PrismaModel = never> = {
@@ -9946,29 +9984,9 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type RefreshTokenCountOrderByAggregateInput = {
@@ -9993,24 +10011,6 @@ export namespace Prisma {
     userId?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type ProjectCountOrderByAggregateInput = {
@@ -10364,6 +10364,10 @@ export namespace Prisma {
     set?: string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type EnumSubscriptionPlanFieldUpdateOperationsInput = {
     set?: $Enums.SubscriptionPlan
   }
@@ -10548,10 +10552,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
     connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
@@ -10838,6 +10838,20 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumSubscriptionPlanFilter<$PrismaModel = never> = {
     equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
     in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
@@ -10891,6 +10905,34 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumSubscriptionPlanWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.SubscriptionPlan | EnumSubscriptionPlanFieldRefInput<$PrismaModel>
     in?: $Enums.SubscriptionPlan[] | ListEnumSubscriptionPlanFieldRefInput<$PrismaModel>
@@ -10923,48 +10965,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumRoleMemberFilter<$PrismaModel = never> = {
@@ -11395,7 +11395,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11411,7 +11411,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11443,7 +11443,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11459,7 +11459,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11475,7 +11475,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11491,7 +11491,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11587,7 +11587,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11603,7 +11603,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11674,7 +11674,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11690,7 +11690,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11751,7 +11751,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11767,7 +11767,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11783,7 +11783,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11799,7 +11799,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11831,7 +11831,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11847,7 +11847,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -11886,7 +11886,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11902,7 +11902,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11923,7 +11923,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -11939,7 +11939,7 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
-    avatarUrl: string
+    avatarPath?: string | null
     name: string
     plan?: $Enums.SubscriptionPlan
     role?: $Enums.RoleUser
@@ -12026,7 +12026,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -12042,7 +12042,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -12069,7 +12069,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -12085,7 +12085,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser

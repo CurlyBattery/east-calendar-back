@@ -8,8 +8,11 @@ import {
   Req,
   Res,
   UnauthorizedException,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { Express } from 'express';
 
 import {
   convertExpToSecond,
@@ -23,6 +26,7 @@ import {
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';
+import { FileUploadInterceptor } from '../shared/file-upload/file-upload.interceptor';
 
 @Controller('auth')
 export class AuthController {
@@ -33,12 +37,18 @@ export class AuthController {
 
   @Public()
   @Post('register')
+  @UseInterceptors(FileUploadInterceptor)
   async register(
     @Body() dto: RegisterDto,
+    @UploadedFile() file: Express.Multer.File,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
     @UserAgent() userAgent: string,
   ) {
+    if (file) {
+      dto.avatarPath = `uploads/${file.filename}`;
+    }
+
     const { accessToken, refreshToken, user } = await this.authService.register(
       dto,
       userAgent,

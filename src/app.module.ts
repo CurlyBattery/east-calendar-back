@@ -9,6 +9,9 @@ import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 import { ProjectModule } from './project/project.module';
 import { SeedModule } from './seed/seed.module';
+import { FileUploadModule } from './shared/file-upload/file-upload.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -17,6 +20,11 @@ import { SeedModule } from './seed/seed.module';
       isGlobal: true,
     }),
     PrismaModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
+    FileUploadModule,
     SeedModule,
     UserModule,
     HashModule,

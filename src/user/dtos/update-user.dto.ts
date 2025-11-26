@@ -5,7 +5,7 @@ import { SubscriptionPlan } from '../../../generated/prisma';
 export const UpdateUserSchema = z.object({
   email: z.string().optional(),
   name: z.string().optional(),
-  avatarUrl: z.string().optional(),
+  avatarPath: z.string().optional(),
   plan: z.enum(SubscriptionPlan).default(SubscriptionPlan.FREE).optional(),
 });
 
