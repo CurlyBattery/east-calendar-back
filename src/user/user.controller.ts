@@ -9,7 +9,6 @@ import { RoleUser } from '../../generated/prisma';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Roles(RoleUser.ADMIN)
   @Get()
   async getUsers() {
     return this.userService.getAll();

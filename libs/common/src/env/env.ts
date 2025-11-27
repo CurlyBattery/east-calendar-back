@@ -6,6 +6,7 @@ export const envSchema = z.object({
   ACCESS_SECRET: z.string(),
   ACCESS_EXP: z.string(),
   REFRESH_EXP: z.string(),
+  YOOKASSA_CALLBACK: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -8,12 +8,14 @@ import {
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SubscriptionPlan } from '../../generated/prisma';
+import { EnvService } from '@app/common';
 
 @Injectable()
 export class PaymentService {
   constructor(
     private readonly yookassaService: YookassaService,
     private readonly prisma: PrismaService,
+    private readonly envService: EnvService,
   ) {}
 
   async createPayment(userId: string) {
@@ -29,7 +31,7 @@ export class PaymentService {
       capture: false,
       confirmation: {
         type: ConfirmationEnum.REDIRECT,
-        return_url: 'https://example.com/thanks',
+        return_url: this.envService.get('YOOKASSA_CALLBACK'),
       },
       metadata: {
         order_id: '12345678',
@@ -37,7 +39,6 @@ export class PaymentService {
     };
 
     const payment = await this.yookassaService.payments.create(paymentData);
-    console.log(payment.id);
 
     await this.prisma.payment.create({
       data: {
@@ -53,16 +54,17 @@ export class PaymentService {
   async capturePayment(userId: string) {
     const dbPayment = await this.prisma.payment.findFirst({
       where: { userId },
+      orderBy: { createdAt: 'desc' },
     });
 
     if (!dbPayment) throw new Error('Payment not found');
-
+    console.log(dbPayment.paymentId);
     const result = await this.yookassaService.payments.capture(
       dbPayment.paymentId,
     );
-
+    let user;
     if (result.status === 'succeeded') {
-      await this.prisma.user.update({
+      user = await this.prisma.user.update({
         where: { id: userId },
         data: {
           plan: SubscriptionPlan.PRO,
@@ -70,6 +72,6 @@ export class PaymentService {
       });
     }
 
-    return result;
+    return { ...result, user };
   }
 }
