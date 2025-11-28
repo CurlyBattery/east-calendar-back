@@ -9,6 +9,7 @@ import { AccessTokenGuard } from './guards/access-token.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from '../user/user.module';
 import { RolesGuard } from './guards/roles.guard';
+import { QRModule } from '../qr/qr.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { RolesGuard } from './guards/roles.guard';
         },
       }),
     }),
+    QRModule,
   ],
   providers: [
     AuthService,

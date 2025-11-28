@@ -200,3 +200,21 @@ model Payment {
 
   @@map("payments")
 }
+
+model QrCodeSession {
+  id        String   @id @default(uuid())
+  token     String
+  expired   DateTime
+  status    QrStatus @default(PENDING)
+  userAgent String   @unique @map("user_agent")
+
+  @@map("qr_code_sessions")
+}
+
+enum QrStatus {
+  PENDING
+  SUCCESS
+  REJECT
+
+  @@map("qr_status")
+}

@@ -126,6 +126,16 @@ export class AuthController {
     return req.user;
   }
 
+  @Public()
+  @Get('/qr')
+  async getGeneratedQR(@Res() res: Response, @UserAgent() userAgent: string) {
+    const qrCode = await this.authService.generateQrCode(userAgent);
+
+    res.status(200);
+    res.type('png');
+    res.send(qrCode);
+  }
+
   setTokensToCookie(
     req: Request,
     res: Response,

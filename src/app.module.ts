@@ -14,6 +14,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { PaymentModule } from './payment/payment.module';
 import { YookassaModule } from 'nestjs-yookassa';
+import { QRModule } from './qr/qr.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { YookassaModule } from 'nestjs-yookassa';
         apiKey: configService.get('YOOKASSA_SECRET_KEY'),
       }),
     }),
+    QRModule,
   ],
   providers: [
     {

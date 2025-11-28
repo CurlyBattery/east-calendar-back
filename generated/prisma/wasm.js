@@ -205,6 +205,14 @@ exports.Prisma.PaymentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.QrCodeSessionScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  expired: 'expired',
+  status: 'status',
+  userAgent: 'userAgent'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -254,6 +262,12 @@ exports.TaskType = exports.$Enums.TaskType = {
   COMPANY: 'COMPANY'
 };
 
+exports.QrStatus = exports.$Enums.QrStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  REJECT: 'REJECT'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   IsSubscriptionPlan: 'IsSubscriptionPlan',
@@ -263,7 +277,8 @@ exports.Prisma.ModelName = {
   Notification: 'Notification',
   Task: 'Task',
   Attachment: 'Attachment',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  QrCodeSession: 'QrCodeSession'
 };
 
 /**

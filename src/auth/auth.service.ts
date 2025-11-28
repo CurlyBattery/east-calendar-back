@@ -12,6 +12,8 @@ import { LoginDto } from './dtos/login.dto';
 import { JwtPayload, Tokens } from './types';
 import { PrismaService } from '../prisma/prisma.service';
 import { v4 } from 'uuid';
+import { QRService } from '../qr/qr.service';
+import { addHours } from 'date-fns';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +21,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly hashService: HashService,
     private readonly jwtService: JwtService,
+    private readonly qrService: QRService,
   ) {}
 
   async register(
@@ -145,5 +148,23 @@ export class AuthService {
         userAgent,
       },
     });
+  }
+
+  // получить сгенерированный qr code
+  async generateQrCode(userAgent: string) {
+    const token = v4();
+    await this.prisma.qrCodeSession.upsert({
+      where: { userAgent },
+      create: {
+        token,
+        expired: addHours(new Date(), 1),
+        userAgent,
+      },
+      update: {
+        token,
+        expired: addHours(new Date(), 1),
+      },
+    });
+    return this.qrService.generateQR(token);
   }
 }
