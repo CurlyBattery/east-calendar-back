@@ -128,9 +128,15 @@ exports.Prisma.UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarPath: 'avatarPath',
   name: 'name',
-  plan: 'plan',
   role: 'role',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.IsSubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionPlan: 'subscriptionPlan',
+  isExpired: 'isExpired'
 };
 
 exports.Prisma.RefreshTokenScalarFieldEnum = {
@@ -213,14 +219,14 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.SubscriptionPlan = exports.$Enums.SubscriptionPlan = {
-  FREE: 'FREE',
-  PRO: 'PRO'
-};
-
 exports.RoleUser = exports.$Enums.RoleUser = {
   ADMIN: 'ADMIN',
   USER: 'USER'
+};
+
+exports.SubscriptionPlan = exports.$Enums.SubscriptionPlan = {
+  FREE: 'FREE',
+  PRO: 'PRO'
 };
 
 exports.RoleMember = exports.$Enums.RoleMember = {
@@ -250,6 +256,7 @@ exports.TaskType = exports.$Enums.TaskType = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  IsSubscriptionPlan: 'IsSubscriptionPlan',
   RefreshToken: 'RefreshToken',
   Project: 'Project',
   ProjectMember: 'ProjectMember',

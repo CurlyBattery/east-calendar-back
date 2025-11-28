@@ -10,6 +10,9 @@ export class SubscriptionGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request: RequestWithUser = context.switchToHttp().getRequest();
 
-    return request.user.plan === SubscriptionPlan.PRO;
+    return (
+      request.user.plan.subscriptionPlan === SubscriptionPlan.PRO &&
+      new Date() < request.user.plan.isExpired
+    );
   }
 }

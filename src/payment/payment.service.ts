@@ -9,6 +9,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SubscriptionPlan } from '../../generated/prisma';
 import { EnvService } from '@app/common';
+import { addMonths, addSeconds } from 'date-fns';
 
 @Injectable()
 export class PaymentService {
@@ -58,7 +59,6 @@ export class PaymentService {
     });
 
     if (!dbPayment) throw new Error('Payment not found');
-    console.log(dbPayment.paymentId);
     const result = await this.yookassaService.payments.capture(
       dbPayment.paymentId,
     );
@@ -67,7 +67,15 @@ export class PaymentService {
       user = await this.prisma.user.update({
         where: { id: userId },
         data: {
-          plan: SubscriptionPlan.PRO,
+          plan: {
+            update: {
+              subscriptionPlan: SubscriptionPlan.PRO,
+              isExpired: addMonths(new Date(), 1),
+            },
+          },
+        },
+        include: {
+          plan: true,
         },
       });
     }

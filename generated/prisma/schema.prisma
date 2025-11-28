@@ -16,27 +16,38 @@ enum RoleUser {
 }
 
 model User {
-  id           String           @id @default(uuid())
-  email        String           @unique
-  passwordHash String           @map("password_hash")
-  avatarPath   String?          @map("avatar_url")
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  avatarPath   String?  @map("avatar_url")
   name         String
-  plan         SubscriptionPlan @default(FREE)
-  role         RoleUser         @default(USER)
+  role         RoleUser @default(USER)
 
   createdAt DateTime @default(now()) @map("created_at")
 
-  createdTasks   Task[]          @relation("CreatedTask")
-  assignedTasks  Task[]          @relation("AssignedTask")
+  createdTasks   Task[]              @relation("CreatedTask")
+  assignedTasks  Task[]              @relation("AssignedTask")
   notifications  Notification[]
   refreshTokens  RefreshToken[]
-  projects       Project[]       @relation("OwnedProjects")
+  projects       Project[]           @relation("OwnedProjects")
   projectMembers ProjectMember[]
   payment        Payment[]
+  plan           IsSubscriptionPlan?
 
   @@index(id)
   @@index(email)
   @@map("users")
+}
+
+model IsSubscriptionPlan {
+  id               String           @id @default(uuid())
+  userId           String           @unique
+  subscriptionPlan SubscriptionPlan @default(FREE)
+  isExpired        DateTime?
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@map("is_subscription_plans")
 }
 
 enum SubscriptionPlan {

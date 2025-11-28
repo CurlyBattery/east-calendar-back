@@ -4,6 +4,7 @@ import * as argon2 from 'argon2';
 import { PrismaService } from '../prisma/prisma.service';
 import { HashService } from '@app/common';
 import { RoleUser, SubscriptionPlan } from '../../generated/prisma';
+import { addYears } from 'date-fns';
 
 @Injectable()
 export class SeedService implements OnModuleInit {
@@ -25,13 +26,21 @@ export class SeedService implements OnModuleInit {
       passwordHash,
       name: 'Rar',
       role: RoleUser.ADMIN,
-      plan: SubscriptionPlan.PRO,
     };
 
     await this.prisma.user.upsert({
       where: { email: user.email },
-      create: user,
-      update: user,
+      create: {
+        ...user,
+        plan: {
+          create: {
+            isExpired: addYears(new Date(), 2),
+          },
+        },
+      },
+      update: {
+        ...user,
+      },
     });
     this.logger.log('Admin successfully created');
   }

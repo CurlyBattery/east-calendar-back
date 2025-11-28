@@ -6,7 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 
 import { HashService } from '@app/common';
-import { User } from '../../generated/prisma';
+import { SubscriptionPlan, User } from '../../generated/prisma';
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';
 import { JwtPayload, Tokens } from './types';
@@ -38,9 +38,16 @@ export class AuthService {
         email: dto.email,
         passwordHash,
         avatarPath: dto.avatarPath,
+        plan: {
+          create: {
+            subscriptionPlan: SubscriptionPlan.FREE,
+          },
+        },
+      },
+      include: {
+        plan: true,
       },
     });
-
     const { accessToken, refreshToken } = await this.getTokens(
       newUser,
       userAgent,

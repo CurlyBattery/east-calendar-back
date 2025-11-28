@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { User } from '../../../generated/prisma';
+import { IsSubscriptionPlan, User } from '../../../generated/prisma';
 
 export interface Tokens {
   accessToken: string;
@@ -13,5 +13,7 @@ export interface JwtPayload {
 }
 
 export interface RequestWithUser extends Request {
-  user: User;
+  user: User & {
+    plan: IsSubscriptionPlan;
+  };
 }
