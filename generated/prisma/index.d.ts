@@ -1719,6 +1719,7 @@ export namespace Prisma {
     projects: number
     projectMembers: number
     payment: number
+    qrCodeSessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1729,6 +1730,7 @@ export namespace Prisma {
     projects?: boolean | UserCountOutputTypeCountProjectsArgs
     projectMembers?: boolean | UserCountOutputTypeCountProjectMembersArgs
     payment?: boolean | UserCountOutputTypeCountPaymentArgs
+    qrCodeSessions?: boolean | UserCountOutputTypeCountQrCodeSessionsArgs
   }
 
   // Custom InputTypes
@@ -1789,6 +1791,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountQrCodeSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QrCodeSessionWhereInput
   }
 
 
@@ -2055,6 +2064,7 @@ export namespace Prisma {
     projectMembers?: boolean | User$projectMembersArgs<ExtArgs>
     payment?: boolean | User$paymentArgs<ExtArgs>
     plan?: boolean | User$planArgs<ExtArgs>
+    qrCodeSessions?: boolean | User$qrCodeSessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2087,6 +2097,7 @@ export namespace Prisma {
     projectMembers?: boolean | User$projectMembersArgs<ExtArgs>
     payment?: boolean | User$paymentArgs<ExtArgs>
     plan?: boolean | User$planArgs<ExtArgs>
+    qrCodeSessions?: boolean | User$qrCodeSessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2102,6 +2113,7 @@ export namespace Prisma {
       projectMembers: Prisma.$ProjectMemberPayload<ExtArgs>[]
       payment: Prisma.$PaymentPayload<ExtArgs>[]
       plan: Prisma.$IsSubscriptionPlanPayload<ExtArgs> | null
+      qrCodeSessions: Prisma.$QrCodeSessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2483,6 +2495,7 @@ export namespace Prisma {
     projectMembers<T extends User$projectMembersArgs<ExtArgs> = {}>(args?: Subset<T, User$projectMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMemberPayload<ExtArgs>, T, "findMany"> | Null>
     payment<T extends User$paymentArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany"> | Null>
     plan<T extends User$planArgs<ExtArgs> = {}>(args?: Subset<T, User$planArgs<ExtArgs>>): Prisma__IsSubscriptionPlanClient<$Result.GetResult<Prisma.$IsSubscriptionPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    qrCodeSessions<T extends User$qrCodeSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$qrCodeSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodeSessionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2985,6 +2998,26 @@ export namespace Prisma {
      */
     include?: IsSubscriptionPlanInclude<ExtArgs> | null
     where?: IsSubscriptionPlanWhereInput
+  }
+
+  /**
+   * User.qrCodeSessions
+   */
+  export type User$qrCodeSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCodeSession
+     */
+    select?: QrCodeSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    where?: QrCodeSessionWhereInput
+    orderBy?: QrCodeSessionOrderByWithRelationInput | QrCodeSessionOrderByWithRelationInput[]
+    cursor?: QrCodeSessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QrCodeSessionScalarFieldEnum | QrCodeSessionScalarFieldEnum[]
   }
 
   /**
@@ -10714,6 +10747,7 @@ export namespace Prisma {
     expired: Date | null
     status: $Enums.QrStatus | null
     userAgent: string | null
+    userId: string | null
   }
 
   export type QrCodeSessionMaxAggregateOutputType = {
@@ -10722,6 +10756,7 @@ export namespace Prisma {
     expired: Date | null
     status: $Enums.QrStatus | null
     userAgent: string | null
+    userId: string | null
   }
 
   export type QrCodeSessionCountAggregateOutputType = {
@@ -10730,6 +10765,7 @@ export namespace Prisma {
     expired: number
     status: number
     userAgent: number
+    userId: number
     _all: number
   }
 
@@ -10740,6 +10776,7 @@ export namespace Prisma {
     expired?: true
     status?: true
     userAgent?: true
+    userId?: true
   }
 
   export type QrCodeSessionMaxAggregateInputType = {
@@ -10748,6 +10785,7 @@ export namespace Prisma {
     expired?: true
     status?: true
     userAgent?: true
+    userId?: true
   }
 
   export type QrCodeSessionCountAggregateInputType = {
@@ -10756,6 +10794,7 @@ export namespace Prisma {
     expired?: true
     status?: true
     userAgent?: true
+    userId?: true
     _all?: true
   }
 
@@ -10837,6 +10876,7 @@ export namespace Prisma {
     expired: Date
     status: $Enums.QrStatus
     userAgent: string
+    userId: string | null
     _count: QrCodeSessionCountAggregateOutputType | null
     _min: QrCodeSessionMinAggregateOutputType | null
     _max: QrCodeSessionMaxAggregateOutputType | null
@@ -10862,6 +10902,8 @@ export namespace Prisma {
     expired?: boolean
     status?: boolean
     userAgent?: boolean
+    userId?: boolean
+    user?: boolean | QrCodeSession$userArgs<ExtArgs>
   }, ExtArgs["result"]["qrCodeSession"]>
 
   export type QrCodeSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10870,6 +10912,8 @@ export namespace Prisma {
     expired?: boolean
     status?: boolean
     userAgent?: boolean
+    userId?: boolean
+    user?: boolean | QrCodeSession$userArgs<ExtArgs>
   }, ExtArgs["result"]["qrCodeSession"]>
 
   export type QrCodeSessionSelectScalar = {
@@ -10878,18 +10922,28 @@ export namespace Prisma {
     expired?: boolean
     status?: boolean
     userAgent?: boolean
+    userId?: boolean
   }
 
+  export type QrCodeSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | QrCodeSession$userArgs<ExtArgs>
+  }
+  export type QrCodeSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | QrCodeSession$userArgs<ExtArgs>
+  }
 
   export type $QrCodeSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "QrCodeSession"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       token: string
       expired: Date
       status: $Enums.QrStatus
       userAgent: string
+      userId: string | null
     }, ExtArgs["result"]["qrCodeSession"]>
     composites: {}
   }
@@ -11254,6 +11308,7 @@ export namespace Prisma {
    */
   export interface Prisma__QrCodeSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends QrCodeSession$userArgs<ExtArgs> = {}>(args?: Subset<T, QrCodeSession$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11288,6 +11343,7 @@ export namespace Prisma {
     readonly expired: FieldRef<"QrCodeSession", 'DateTime'>
     readonly status: FieldRef<"QrCodeSession", 'QrStatus'>
     readonly userAgent: FieldRef<"QrCodeSession", 'String'>
+    readonly userId: FieldRef<"QrCodeSession", 'String'>
   }
     
 
@@ -11300,6 +11356,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the QrCodeSession
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
     /**
      * Filter, which QrCodeSession to fetch.
      */
@@ -11315,6 +11375,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * Filter, which QrCodeSession to fetch.
      */
     where: QrCodeSessionWhereUniqueInput
@@ -11328,6 +11392,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the QrCodeSession
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
     /**
      * Filter, which QrCodeSession to fetch.
      */
@@ -11373,6 +11441,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * Filter, which QrCodeSession to fetch.
      */
     where?: QrCodeSessionWhereInput
@@ -11417,6 +11489,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * Filter, which QrCodeSessions to fetch.
      */
     where?: QrCodeSessionWhereInput
@@ -11456,6 +11532,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * The data needed to create a QrCodeSession.
      */
     data: XOR<QrCodeSessionCreateInput, QrCodeSessionUncheckedCreateInput>
@@ -11485,6 +11565,10 @@ export namespace Prisma {
      */
     data: QrCodeSessionCreateManyInput | QrCodeSessionCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -11495,6 +11579,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the QrCodeSession
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
     /**
      * The data needed to update a QrCodeSession.
      */
@@ -11528,6 +11616,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * The filter to search for the QrCodeSession to update in case it exists.
      */
     where: QrCodeSessionWhereUniqueInput
@@ -11550,6 +11642,10 @@ export namespace Prisma {
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
+    /**
      * Filter which QrCodeSession to delete.
      */
     where: QrCodeSessionWhereUniqueInput
@@ -11566,6 +11662,21 @@ export namespace Prisma {
   }
 
   /**
+   * QrCodeSession.user
+   */
+  export type QrCodeSession$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * QrCodeSession without action
    */
   export type QrCodeSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11573,6 +11684,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the QrCodeSession
      */
     select?: QrCodeSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeSessionInclude<ExtArgs> | null
   }
 
 
@@ -11705,7 +11820,8 @@ export namespace Prisma {
     token: 'token',
     expired: 'expired',
     status: 'status',
-    userAgent: 'userAgent'
+    userAgent: 'userAgent',
+    userId: 'userId'
   };
 
   export type QrCodeSessionScalarFieldEnum = (typeof QrCodeSessionScalarFieldEnum)[keyof typeof QrCodeSessionScalarFieldEnum]
@@ -11909,6 +12025,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberListRelationFilter
     payment?: PaymentListRelationFilter
     plan?: XOR<IsSubscriptionPlanNullableRelationFilter, IsSubscriptionPlanWhereInput> | null
+    qrCodeSessions?: QrCodeSessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11927,6 +12044,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberOrderByRelationAggregateInput
     payment?: PaymentOrderByRelationAggregateInput
     plan?: IsSubscriptionPlanOrderByWithRelationInput
+    qrCodeSessions?: QrCodeSessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11948,6 +12066,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberListRelationFilter
     payment?: PaymentListRelationFilter
     plan?: XOR<IsSubscriptionPlanNullableRelationFilter, IsSubscriptionPlanWhereInput> | null
+    qrCodeSessions?: QrCodeSessionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12489,6 +12608,8 @@ export namespace Prisma {
     expired?: DateTimeFilter<"QrCodeSession"> | Date | string
     status?: EnumQrStatusFilter<"QrCodeSession"> | $Enums.QrStatus
     userAgent?: StringFilter<"QrCodeSession"> | string
+    userId?: StringNullableFilter<"QrCodeSession"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
   export type QrCodeSessionOrderByWithRelationInput = {
@@ -12497,18 +12618,22 @@ export namespace Prisma {
     expired?: SortOrder
     status?: SortOrder
     userAgent?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type QrCodeSessionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    token?: string
     userAgent?: string
     AND?: QrCodeSessionWhereInput | QrCodeSessionWhereInput[]
     OR?: QrCodeSessionWhereInput[]
     NOT?: QrCodeSessionWhereInput | QrCodeSessionWhereInput[]
-    token?: StringFilter<"QrCodeSession"> | string
     expired?: DateTimeFilter<"QrCodeSession"> | Date | string
     status?: EnumQrStatusFilter<"QrCodeSession"> | $Enums.QrStatus
-  }, "id" | "userAgent">
+    userId?: StringNullableFilter<"QrCodeSession"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id" | "token" | "userAgent">
 
   export type QrCodeSessionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -12516,6 +12641,7 @@ export namespace Prisma {
     expired?: SortOrder
     status?: SortOrder
     userAgent?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: QrCodeSessionCountOrderByAggregateInput
     _max?: QrCodeSessionMaxOrderByAggregateInput
     _min?: QrCodeSessionMinOrderByAggregateInput
@@ -12530,6 +12656,7 @@ export namespace Prisma {
     expired?: DateTimeWithAggregatesFilter<"QrCodeSession"> | Date | string
     status?: EnumQrStatusWithAggregatesFilter<"QrCodeSession"> | $Enums.QrStatus
     userAgent?: StringWithAggregatesFilter<"QrCodeSession"> | string
+    userId?: StringNullableWithAggregatesFilter<"QrCodeSession"> | string | null
   }
 
   export type UserCreateInput = {
@@ -12548,6 +12675,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12566,6 +12694,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12584,6 +12713,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12602,6 +12732,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13152,6 +13283,7 @@ export namespace Prisma {
     expired: Date | string
     status?: $Enums.QrStatus
     userAgent: string
+    user?: UserCreateNestedOneWithoutQrCodeSessionsInput
   }
 
   export type QrCodeSessionUncheckedCreateInput = {
@@ -13160,6 +13292,7 @@ export namespace Prisma {
     expired: Date | string
     status?: $Enums.QrStatus
     userAgent: string
+    userId?: string | null
   }
 
   export type QrCodeSessionUpdateInput = {
@@ -13168,6 +13301,7 @@ export namespace Prisma {
     expired?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
     userAgent?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneWithoutQrCodeSessionsNestedInput
   }
 
   export type QrCodeSessionUncheckedUpdateInput = {
@@ -13176,6 +13310,7 @@ export namespace Prisma {
     expired?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
     userAgent?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type QrCodeSessionCreateManyInput = {
@@ -13184,6 +13319,7 @@ export namespace Prisma {
     expired: Date | string
     status?: $Enums.QrStatus
     userAgent: string
+    userId?: string | null
   }
 
   export type QrCodeSessionUpdateManyMutationInput = {
@@ -13200,6 +13336,7 @@ export namespace Prisma {
     expired?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
     userAgent?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13291,6 +13428,12 @@ export namespace Prisma {
     isNot?: IsSubscriptionPlanWhereInput | null
   }
 
+  export type QrCodeSessionListRelationFilter = {
+    every?: QrCodeSessionWhereInput
+    some?: QrCodeSessionWhereInput
+    none?: QrCodeSessionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -13317,6 +13460,10 @@ export namespace Prisma {
   }
 
   export type PaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QrCodeSessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13805,6 +13952,7 @@ export namespace Prisma {
     expired?: SortOrder
     status?: SortOrder
     userAgent?: SortOrder
+    userId?: SortOrder
   }
 
   export type QrCodeSessionMaxOrderByAggregateInput = {
@@ -13813,6 +13961,7 @@ export namespace Prisma {
     expired?: SortOrder
     status?: SortOrder
     userAgent?: SortOrder
+    userId?: SortOrder
   }
 
   export type QrCodeSessionMinOrderByAggregateInput = {
@@ -13821,6 +13970,7 @@ export namespace Prisma {
     expired?: SortOrder
     status?: SortOrder
     userAgent?: SortOrder
+    userId?: SortOrder
   }
 
   export type EnumQrStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13888,6 +14038,13 @@ export namespace Prisma {
     connect?: IsSubscriptionPlanWhereUniqueInput
   }
 
+  export type QrCodeSessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput> | QrCodeSessionCreateWithoutUserInput[] | QrCodeSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QrCodeSessionCreateOrConnectWithoutUserInput | QrCodeSessionCreateOrConnectWithoutUserInput[]
+    createMany?: QrCodeSessionCreateManyUserInputEnvelope
+    connect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+  }
+
   export type TaskUncheckedCreateNestedManyWithoutCreatorInput = {
     create?: XOR<TaskCreateWithoutCreatorInput, TaskUncheckedCreateWithoutCreatorInput> | TaskCreateWithoutCreatorInput[] | TaskUncheckedCreateWithoutCreatorInput[]
     connectOrCreate?: TaskCreateOrConnectWithoutCreatorInput | TaskCreateOrConnectWithoutCreatorInput[]
@@ -13941,6 +14098,13 @@ export namespace Prisma {
     create?: XOR<IsSubscriptionPlanCreateWithoutUserInput, IsSubscriptionPlanUncheckedCreateWithoutUserInput>
     connectOrCreate?: IsSubscriptionPlanCreateOrConnectWithoutUserInput
     connect?: IsSubscriptionPlanWhereUniqueInput
+  }
+
+  export type QrCodeSessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput> | QrCodeSessionCreateWithoutUserInput[] | QrCodeSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QrCodeSessionCreateOrConnectWithoutUserInput | QrCodeSessionCreateOrConnectWithoutUserInput[]
+    createMany?: QrCodeSessionCreateManyUserInputEnvelope
+    connect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14067,6 +14231,20 @@ export namespace Prisma {
     update?: XOR<XOR<IsSubscriptionPlanUpdateToOneWithWhereWithoutUserInput, IsSubscriptionPlanUpdateWithoutUserInput>, IsSubscriptionPlanUncheckedUpdateWithoutUserInput>
   }
 
+  export type QrCodeSessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput> | QrCodeSessionCreateWithoutUserInput[] | QrCodeSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QrCodeSessionCreateOrConnectWithoutUserInput | QrCodeSessionCreateOrConnectWithoutUserInput[]
+    upsert?: QrCodeSessionUpsertWithWhereUniqueWithoutUserInput | QrCodeSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QrCodeSessionCreateManyUserInputEnvelope
+    set?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    disconnect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    delete?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    connect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    update?: QrCodeSessionUpdateWithWhereUniqueWithoutUserInput | QrCodeSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QrCodeSessionUpdateManyWithWhereWithoutUserInput | QrCodeSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QrCodeSessionScalarWhereInput | QrCodeSessionScalarWhereInput[]
+  }
+
   export type TaskUncheckedUpdateManyWithoutCreatorNestedInput = {
     create?: XOR<TaskCreateWithoutCreatorInput, TaskUncheckedCreateWithoutCreatorInput> | TaskCreateWithoutCreatorInput[] | TaskUncheckedCreateWithoutCreatorInput[]
     connectOrCreate?: TaskCreateOrConnectWithoutCreatorInput | TaskCreateOrConnectWithoutCreatorInput[]
@@ -14173,6 +14351,20 @@ export namespace Prisma {
     delete?: IsSubscriptionPlanWhereInput | boolean
     connect?: IsSubscriptionPlanWhereUniqueInput
     update?: XOR<XOR<IsSubscriptionPlanUpdateToOneWithWhereWithoutUserInput, IsSubscriptionPlanUpdateWithoutUserInput>, IsSubscriptionPlanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput> | QrCodeSessionCreateWithoutUserInput[] | QrCodeSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QrCodeSessionCreateOrConnectWithoutUserInput | QrCodeSessionCreateOrConnectWithoutUserInput[]
+    upsert?: QrCodeSessionUpsertWithWhereUniqueWithoutUserInput | QrCodeSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QrCodeSessionCreateManyUserInputEnvelope
+    set?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    disconnect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    delete?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    connect?: QrCodeSessionWhereUniqueInput | QrCodeSessionWhereUniqueInput[]
+    update?: QrCodeSessionUpdateWithWhereUniqueWithoutUserInput | QrCodeSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QrCodeSessionUpdateManyWithWhereWithoutUserInput | QrCodeSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QrCodeSessionScalarWhereInput | QrCodeSessionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPlanInput = {
@@ -14487,8 +14679,24 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentInput, UserUpdateWithoutPaymentInput>, UserUncheckedUpdateWithoutPaymentInput>
   }
 
+  export type UserCreateNestedOneWithoutQrCodeSessionsInput = {
+    create?: XOR<UserCreateWithoutQrCodeSessionsInput, UserUncheckedCreateWithoutQrCodeSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQrCodeSessionsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnumQrStatusFieldUpdateOperationsInput = {
     set?: $Enums.QrStatus
+  }
+
+  export type UserUpdateOneWithoutQrCodeSessionsNestedInput = {
+    create?: XOR<UserCreateWithoutQrCodeSessionsInput, UserUncheckedCreateWithoutQrCodeSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQrCodeSessionsInput
+    upsert?: UserUpsertWithoutQrCodeSessionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutQrCodeSessionsInput, UserUpdateWithoutQrCodeSessionsInput>, UserUncheckedUpdateWithoutQrCodeSessionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14984,6 +15192,32 @@ export namespace Prisma {
     create: XOR<IsSubscriptionPlanCreateWithoutUserInput, IsSubscriptionPlanUncheckedCreateWithoutUserInput>
   }
 
+  export type QrCodeSessionCreateWithoutUserInput = {
+    id?: string
+    token: string
+    expired: Date | string
+    status?: $Enums.QrStatus
+    userAgent: string
+  }
+
+  export type QrCodeSessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    token: string
+    expired: Date | string
+    status?: $Enums.QrStatus
+    userAgent: string
+  }
+
+  export type QrCodeSessionCreateOrConnectWithoutUserInput = {
+    where: QrCodeSessionWhereUniqueInput
+    create: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type QrCodeSessionCreateManyUserInputEnvelope = {
+    data: QrCodeSessionCreateManyUserInput | QrCodeSessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TaskUpsertWithWhereUniqueWithoutCreatorInput = {
     where: TaskWhereUniqueInput
     update: XOR<TaskUpdateWithoutCreatorInput, TaskUncheckedUpdateWithoutCreatorInput>
@@ -15194,6 +15428,34 @@ export namespace Prisma {
     isExpired?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type QrCodeSessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: QrCodeSessionWhereUniqueInput
+    update: XOR<QrCodeSessionUpdateWithoutUserInput, QrCodeSessionUncheckedUpdateWithoutUserInput>
+    create: XOR<QrCodeSessionCreateWithoutUserInput, QrCodeSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type QrCodeSessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: QrCodeSessionWhereUniqueInput
+    data: XOR<QrCodeSessionUpdateWithoutUserInput, QrCodeSessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type QrCodeSessionUpdateManyWithWhereWithoutUserInput = {
+    where: QrCodeSessionScalarWhereInput
+    data: XOR<QrCodeSessionUpdateManyMutationInput, QrCodeSessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type QrCodeSessionScalarWhereInput = {
+    AND?: QrCodeSessionScalarWhereInput | QrCodeSessionScalarWhereInput[]
+    OR?: QrCodeSessionScalarWhereInput[]
+    NOT?: QrCodeSessionScalarWhereInput | QrCodeSessionScalarWhereInput[]
+    id?: StringFilter<"QrCodeSession"> | string
+    token?: StringFilter<"QrCodeSession"> | string
+    expired?: DateTimeFilter<"QrCodeSession"> | Date | string
+    status?: EnumQrStatusFilter<"QrCodeSession"> | $Enums.QrStatus
+    userAgent?: StringFilter<"QrCodeSession"> | string
+    userId?: StringNullableFilter<"QrCodeSession"> | string | null
+  }
+
   export type UserCreateWithoutPlanInput = {
     id?: string
     email: string
@@ -15209,6 +15471,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutOwnerInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPlanInput = {
@@ -15226,6 +15489,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPlanInput = {
@@ -15259,6 +15523,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutOwnerNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPlanInput = {
@@ -15276,6 +15541,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
@@ -15293,6 +15559,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -15310,6 +15577,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -15343,6 +15611,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -15360,6 +15629,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProjectsInput = {
@@ -15377,6 +15647,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectsInput = {
@@ -15394,6 +15665,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectsInput = {
@@ -15491,6 +15763,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -15508,6 +15781,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectMemberUpsertWithWhereUniqueWithoutProjectInput = {
@@ -15580,6 +15854,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutOwnerInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectMembersInput = {
@@ -15597,6 +15872,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectMembersInput = {
@@ -15659,6 +15935,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutOwnerNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectMembersInput = {
@@ -15676,6 +15953,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -15693,6 +15971,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -15710,6 +15989,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -15743,6 +16023,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -15760,6 +16041,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutTasksInput = {
@@ -15800,6 +16082,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTasksInput = {
@@ -15817,6 +16100,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -15839,6 +16123,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     payment?: PaymentCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -15856,6 +16141,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -15944,6 +16230,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -15961,6 +16248,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutAssignedTasksInput = {
@@ -15989,6 +16277,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     payment?: PaymentUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -16006,6 +16295,7 @@ export namespace Prisma {
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
     payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AttachmentUpsertWithWhereUniqueWithoutTaskInput = {
@@ -16131,6 +16421,7 @@ export namespace Prisma {
     projects?: ProjectCreateNestedManyWithoutOwnerInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentInput = {
@@ -16148,6 +16439,7 @@ export namespace Prisma {
     projects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
     plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+    qrCodeSessions?: QrCodeSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentInput = {
@@ -16181,6 +16473,7 @@ export namespace Prisma {
     projects?: ProjectUpdateManyWithoutOwnerNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentInput = {
@@ -16197,6 +16490,95 @@ export namespace Prisma {
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     projects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
+    qrCodeSessions?: QrCodeSessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutQrCodeSessionsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    avatarPath?: string | null
+    name: string
+    role?: $Enums.RoleUser
+    createdAt?: Date | string
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    projects?: ProjectCreateNestedManyWithoutOwnerInput
+    projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    payment?: PaymentCreateNestedManyWithoutUserInput
+    plan?: IsSubscriptionPlanCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutQrCodeSessionsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    avatarPath?: string | null
+    name: string
+    role?: $Enums.RoleUser
+    createdAt?: Date | string
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    projects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    payment?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    plan?: IsSubscriptionPlanUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutQrCodeSessionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutQrCodeSessionsInput, UserUncheckedCreateWithoutQrCodeSessionsInput>
+  }
+
+  export type UserUpsertWithoutQrCodeSessionsInput = {
+    update: XOR<UserUpdateWithoutQrCodeSessionsInput, UserUncheckedUpdateWithoutQrCodeSessionsInput>
+    create: XOR<UserCreateWithoutQrCodeSessionsInput, UserUncheckedCreateWithoutQrCodeSessionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutQrCodeSessionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutQrCodeSessionsInput, UserUncheckedUpdateWithoutQrCodeSessionsInput>
+  }
+
+  export type UserUpdateWithoutQrCodeSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    projects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    payment?: PaymentUpdateManyWithoutUserNestedInput
+    plan?: IsSubscriptionPlanUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutQrCodeSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    projects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    payment?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     plan?: IsSubscriptionPlanUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -16264,6 +16646,14 @@ export namespace Prisma {
     status: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type QrCodeSessionCreateManyUserInput = {
+    id?: string
+    token: string
+    expired: Date | string
+    status?: $Enums.QrStatus
+    userAgent: string
   }
 
   export type TaskUpdateWithoutCreatorInput = {
@@ -16470,6 +16860,30 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeSessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expired?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
+    userAgent?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type QrCodeSessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expired?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
+    userAgent?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type QrCodeSessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expired?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumQrStatusFieldUpdateOperationsInput | $Enums.QrStatus
+    userAgent?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProjectMemberCreateManyProjectInput = {

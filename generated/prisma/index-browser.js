@@ -210,7 +210,8 @@ exports.Prisma.QrCodeSessionScalarFieldEnum = {
   token: 'token',
   expired: 'expired',
   status: 'status',
-  userAgent: 'userAgent'
+  userAgent: 'userAgent',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {

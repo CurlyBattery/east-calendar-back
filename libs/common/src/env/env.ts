@@ -7,6 +7,7 @@ export const envSchema = z.object({
   ACCESS_EXP: z.string(),
   REFRESH_EXP: z.string(),
   YOOKASSA_CALLBACK: z.string(),
+  FRONTEND_URL: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

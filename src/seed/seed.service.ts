@@ -34,12 +34,19 @@ export class SeedService implements OnModuleInit {
         ...user,
         plan: {
           create: {
+            subscriptionPlan: SubscriptionPlan.PRO,
             isExpired: addYears(new Date(), 2),
           },
         },
       },
       update: {
         ...user,
+        plan: {
+          update: {
+            subscriptionPlan: SubscriptionPlan.PRO,
+            isExpired: addYears(new Date(), 2),
+          }
+        }
       },
     });
     this.logger.log('Admin successfully created');

@@ -33,6 +33,7 @@ model User {
   projectMembers ProjectMember[]
   payment        Payment[]
   plan           IsSubscriptionPlan?
+  qrCodeSessions QrCodeSession[]
 
   @@index(id)
   @@index(email)
@@ -203,10 +204,13 @@ model Payment {
 
 model QrCodeSession {
   id        String   @id @default(uuid())
-  token     String
+  token     String   @unique
   expired   DateTime
   status    QrStatus @default(PENDING)
   userAgent String   @unique @map("user_agent")
+  userId    String?
+
+  user User? @relation(references: [id], fields: [userId], onDelete: Cascade)
 
   @@map("qr_code_sessions")
 }

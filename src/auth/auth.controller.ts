@@ -4,7 +4,9 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
+  Query,
   Req,
   Res,
   UnauthorizedException,
@@ -22,11 +24,14 @@ import {
   ExpType,
   UserAgent,
   Public,
+  CurrentUser,
 } from '@app/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';
 import { FileUploadInterceptor } from '../shared/file-upload/file-upload.interceptor';
+import { QrStatus, User } from '../../generated/prisma';
+import { ConfirmQrDto } from './dtos/confirm-qr.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -84,6 +89,7 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
     @Cookie('refreshToken') token: string,
+    @UserAgent() userAgent: string,
   ) {
     if (!token) {
       throw new UnauthorizedException();
@@ -93,7 +99,7 @@ export class AuthController {
     cookieFactory.remove('accessToken');
     cookieFactory.remove('refreshToken');
 
-    await this.authService.removeToken(token);
+    await this.authService.removeToken(token, userAgent);
 
     return { message: 'Logged out' };
   }
@@ -129,11 +135,52 @@ export class AuthController {
   @Public()
   @Get('/qr')
   async getGeneratedQR(@Res() res: Response, @UserAgent() userAgent: string) {
-    const qrCode = await this.authService.generateQrCode(userAgent);
+    const { qrCode, token } = await this.authService.generateQrCode(userAgent);
 
     res.status(200);
     res.type('png');
+    res.setHeader('X-QR-Session-Token', token);
     res.send(qrCode);
+  }
+
+  @Post('/qr/confirm')
+  async confirmQr(@Body() dto: ConfirmQrDto, @CurrentUser() user: User) {
+    await this.authService.confirmQr(dto, user.id);
+  }
+
+  @Public()
+  @Get('/qr/check')
+  async checkStatusQr(
+    @Query('token') token: string,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const check = await this.authService.checkStatusQr(token);
+    switch (check.session.status) {
+      case QrStatus.SUCCESS: {
+        this.setTokensToCookie(
+          req,
+          res,
+          check.tokens.accessToken,
+          check.tokens.refreshToken,
+        );
+        return {
+          session: check.session,
+          accessToken: check.tokens.accessToken,
+        };
+      }
+      case QrStatus.REJECT: {
+        return check;
+      }
+      default: {
+        return check;
+      }
+    }
+  }
+
+  @Get('/devices')
+  async getAllDevices(@CurrentUser() user: User) {
+    return this.authService.getAllDevices(user.id);
   }
 
   setTokensToCookie(
