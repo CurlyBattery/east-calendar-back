@@ -6,7 +6,7 @@ export class QRService {
   async generateQR(data: string) {
     try {
       const qrCodeBuff = await qrcode.toBuffer(data, {
-        width: 512,
+        width: 200,
       });
       return qrCodeBuff;
     } catch (error) {

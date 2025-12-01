@@ -261,7 +261,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\срет\\WebstormProjects\\East Calendar\\east-calendar-back\\generated\\prisma",
+      "value": "C:\\Users\\GM50\\WebstormProjects\\EastCalendar\\east-calendar-back\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -275,7 +275,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\срет\\WebstormProjects\\East Calendar\\east-calendar-back\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\GM50\\WebstormProjects\\EastCalendar\\east-calendar-back\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

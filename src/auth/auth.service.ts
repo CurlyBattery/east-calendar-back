@@ -199,8 +199,8 @@ export class AuthService {
     return { qrCode, token };
   }
 
-  getAllDevices(userId: string) {
-    return this.prisma.user.findUnique({
+  async getAllDevices(userId: string) {
+    const { refreshTokens } = await this.prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -212,6 +212,7 @@ export class AuthService {
         },
       },
     });
+    return refreshTokens;
   }
 
   async confirmQr(confirmQrDto: ConfirmQrDto, userId: string) {
