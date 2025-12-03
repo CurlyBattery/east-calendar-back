@@ -6,10 +6,14 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { UpdateTaskDto } from './dtos/update-task.dto';
+import { TasksSearchService } from './task-search.service';
 
 @Injectable()
 export class TaskService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly tasksSearchService: TasksSearchService,
+  ) {}
 
   async create(dto: CreateTaskDto, userId: string) {
     const project = await this.prisma.project.findUnique({
@@ -34,7 +38,7 @@ export class TaskService {
         throw new ForbiddenException('Member not found in project');
       }
     }
-    return this.prisma.task.create({
+    const task = await this.prisma.task.create({
       data: {
         title: dto.title,
         description: dto.description,
@@ -51,16 +55,32 @@ export class TaskService {
         project: true,
       },
     });
+    await this.tasksSearchService.indexTask(task);
+    return task;
   }
 
-  findAll() {
-    return this.prisma.task.findMany({
-      include: {
-        assignee: true,
-        creator: true,
-        project: true,
-      },
+  async findAllMy(userId: string, text?: string) {
+    if (!text) {
+      return this.prisma.task.findMany({
+        where: {
+          assigneeId: userId,
+        },
+        include: {
+          assignee: true,
+          creator: true,
+          project: true,
+        },
+      });
+    }
+    const results = await this.tasksSearchService.search(text);
+    const ids = results.map((task) => task.id);
+    if (!ids.length) {
+      return [];
+    }
+    const tasks = await this.prisma.task.findMany({
+      where: { id: { in: ids }, assigneeId: userId },
     });
+    return tasks;
   }
 
   findAllMyByProject(projectId: string, userId: string) {

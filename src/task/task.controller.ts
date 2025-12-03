@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
@@ -22,16 +23,10 @@ export class TaskController {
     return this.taskService.create(createTaskDto, user.id);
   }
 
-  @Roles(RoleUser.ADMIN)
-  @Get()
-  findAll() {
-    return this.taskService.findAll();
+  @Get('my')
+  findAllMy(@CurrentUser() user: User, @Query('text') text?: string) {
+    return this.taskService.findAllMy(user.id, text);
   }
-
-  // @Get('my')
-  // findAllMy(@CurrentUser() user: User) {
-  //   return this.taskService.findAllMy();
-  // }
 
   @Get('my/:id')
   findAllMyByProject(
