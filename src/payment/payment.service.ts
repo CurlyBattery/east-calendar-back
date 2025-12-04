@@ -9,7 +9,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SubscriptionPlan } from '../../generated/prisma';
 import { EnvService } from '@app/common';
-import { addMonths, addSeconds } from 'date-fns';
+import { addMonths } from 'date-fns';
 
 @Injectable()
 export class PaymentService {
@@ -22,7 +22,7 @@ export class PaymentService {
   async createPayment(userId: string) {
     const paymentData: CreatePaymentRequest = {
       amount: {
-        value: 100,
+        value: 499,
         currency: CurrencyEnum.RUB,
       },
       description: 'Test payment',

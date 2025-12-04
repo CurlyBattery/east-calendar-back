@@ -123,7 +123,13 @@ export class TaskService {
         title: dto.title,
         description: dto.description,
         start: dto.start,
+        status: dto.status,
         end: dto.end,
+      },
+      include: {
+        creator: true,
+        assignee: true,
+        project: true,
       },
     });
   }
