@@ -30,8 +30,8 @@ export class ProjectService {
         },
       },
       include: {
-        owner: true
-      }
+        owner: true,
+      },
     });
   }
 
@@ -121,7 +121,11 @@ export class ProjectService {
         projectId,
       },
       include: {
-        user: true,
+        user: {
+          include: {
+            plan: true,
+          },
+        },
       },
     });
   }

@@ -79,6 +79,11 @@ export class TaskService {
     }
     const tasks = await this.prisma.task.findMany({
       where: { id: { in: ids }, assigneeId: userId },
+      include: {
+        assignee: true,
+        creator: true,
+        project: true,
+      },
     });
     return tasks;
   }

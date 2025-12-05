@@ -77,8 +77,6 @@ export class AuthController {
       dto,
       userAgent,
     );
-    console.log(accessToken, refreshToken, user)
-
     this.setTokensToCookie(req, res, accessToken, refreshToken);
 
     return user;
