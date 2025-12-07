@@ -1,40 +1,42 @@
-# ==================================
-# Build stage
-# ==================================
-FROM node:lts-alpine AS builder
+FROM node:18-alpine AS builder
 
-USER node
-WORKDIR /home/node
+WORKDIR /app
 
-COPY package*.json .
+# Копируем package.json и package-lock.json
+COPY package*.json ./
+COPY prisma ./prisma/
+
+# Устанавливаем зависимости
 RUN npm ci
 
-COPY --chown=node:node . .
+# Генерируем Prisma Client
+RUN npx prisma generate
 
-RUN npm run build && npm prune --omit=dev
+# Копируем остальной код
+COPY . .
 
+# Собираем приложение
+RUN npm run build
 
-# ==================================
-# Final run stage
-# ==================================
-FROM node:lts-alpine
+# --- Production stage ---
+FROM node:18-alpine
 
-ENV NODE_ENV production
-USER node
-WORKDIR /home/node
+WORKDIR /app
 
-COPY --from=builder --chown=node:node /home/node/package*.json .
-COPY --from=builder --chown=node:node /home/node/node_modules ./node_modules
-COPY --from=builder --chown=node:node /home/node/dist ./dist
+# Копируем package.json
+COPY package*.json ./
+COPY prisma ./prisma/
 
-COPY --from=builder --chown=node:node /home/node/node_modules/.prisma ./node_modules/.prisma
+# Устанавливаем только production зависимости
+RUN npm ci --only=production
 
-COPY --from=builder --chown=node:node /home/node/node_modules/@prisma/client/runtime ./node_modules/@prisma/client/runtime
+# Генерируем Prisma Client для production
+RUN npx prisma generate
 
-COPY --from=builder --chown=node:node /home/node/prisma ./prisma
+# Копируем собранный код
+COPY --from=builder /app/dist ./dist
 
-ARG PORT
-EXPOSE ${PORT:-3000}
+EXPOSE 3000
 
-CMD ["/bin/sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
-#CMD ["node", "dist/main.js"]
+# Запускаем миграции и приложение
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
