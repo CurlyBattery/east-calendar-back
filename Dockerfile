@@ -1,7 +1,7 @@
 FROM node:18-alpine AS builder
 
 # Установка PNPM
-RUN npm install -g pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ COPY prisma ./prisma/
 RUN pnpm install --frozen-lockfile
 
 # Генерируем Prisma Client
-RUN pnpm prisma generate
+RUN pnpm exec prisma generate
 
 # Копируем остальной код
 COPY . .
@@ -25,7 +25,7 @@ RUN pnpm run build
 FROM node:18-alpine
 
 # Установка PNPM
-RUN npm install -g pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
@@ -37,7 +37,7 @@ COPY prisma ./prisma/
 RUN pnpm install --prod --frozen-lockfile
 
 # Генерируем Prisma Client
-RUN pnpm prisma generate
+RUN pnpm exec prisma generate
 
 # Копируем собранный код
 COPY --from=builder /app/dist ./dist
@@ -45,4 +45,4 @@ COPY --from=builder /app/dist ./dist
 EXPOSE 3000
 
 # Запускаем миграции и приложение
-CMD ["sh", "-c", "pnpm prisma migrate deploy && node dist/main"]
+CMD ["sh", "-c", "pnpm exec prisma migrate deploy && node dist/main"]
