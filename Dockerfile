@@ -1,7 +1,5 @@
 FROM node:23 AS builder
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
@@ -15,8 +13,6 @@ COPY . .
 
 RUN pnpm run build
 FROM node:23
-
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
 RUN npm install -g prisma
 
