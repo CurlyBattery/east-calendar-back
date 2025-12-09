@@ -10,7 +10,7 @@ export const cookieLib = (req: Request, res: Response) => {
     res.cookie(name, value, {
       httpOnly: true,
       path: '/',
-      secure: process.env.NODE_ENV === 'production',
+      // secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24,
       ...cookieOptions,
     });
