@@ -26,7 +26,7 @@ import { SearchModule } from './search/search.module';
     PrismaModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
-      serveRoot: '/uploads',
+      serveRoot: '/api/uploads',
     }),
     FileUploadModule,
     SeedModule,

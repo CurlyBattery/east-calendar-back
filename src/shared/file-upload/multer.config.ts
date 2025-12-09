@@ -1,9 +1,9 @@
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, join } from 'path';
 
 export const multerConfig = {
   storage: diskStorage({
-    destination: './uploads',
+    destination: join(process.cwd(), 'uploads'),
     filename: (req, file, callback) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       const fileExt = extname(file.originalname);
