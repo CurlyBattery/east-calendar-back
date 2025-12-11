@@ -141,6 +141,42 @@ export class AuthService {
     });
   }
 
+  async removeTokenByAgent(userId: string, userAgent: string) {
+    const refreshToken = await this.prisma.refreshToken.findFirst({
+      where: {
+        userId,
+        userAgent,
+      },
+      include: {
+        user: {
+          select: {
+            qrCodeSessions: true,
+          },
+        },
+      },
+    });
+    if (!refreshToken) throw new UnauthorizedException('Invalid refresh token');
+
+    const qrSession = await this.prisma.qrCodeSession.findUnique({
+      where: {
+        userId: refreshToken.userId,
+        userAgent,
+      },
+    });
+    if (qrSession) {
+      await this.prisma.qrCodeSession.delete({
+        where: {
+          userId: refreshToken.userId,
+          userAgent,
+        },
+      });
+    }
+
+    await this.prisma.refreshToken.delete({
+      where: { token: refreshToken.token },
+    });
+  }
+
   async getTokens(user: User, userAgent: string): Promise<Tokens> {
     const jwtPayload: JwtPayload = {
       sub: user.id,

@@ -32,6 +32,7 @@ import { LoginDto } from './dtos/login.dto';
 import { FileUploadInterceptor } from '../shared/file-upload/file-upload.interceptor';
 import { QrStatus, User } from '../../generated/prisma';
 import { ConfirmQrDto } from './dtos/confirm-qr.dto';
+import { LogoutDto } from './dtos/logout.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -99,6 +100,20 @@ export class AuthController {
     cookieFactory.remove('refreshToken');
 
     await this.authService.removeToken(token, userAgent);
+
+    return { message: 'Logged out' };
+  }
+
+  @Post('logout/agent')
+  @HttpCode(HttpStatus.OK)
+  async logoutAgent(
+    @CurrentUser() user: User,
+    @Body() logoutAgentDto: LogoutDto,
+  ) {
+    await this.authService.removeTokenByAgent(
+      user.id,
+      logoutAgentDto.userAgent,
+    );
 
     return { message: 'Logged out' };
   }
