@@ -37,6 +37,9 @@ export class UserService {
         ...user,
         ...dto,
       },
+      include: {
+        plan: true,
+      },
     });
   }
 
