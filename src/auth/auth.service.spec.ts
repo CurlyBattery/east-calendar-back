@@ -41,6 +41,8 @@ const mockPrisma = {
   refreshToken: {
     findFirst: jest.fn(),
     upsert: jest.fn(),
+    findUnique: jest.fn(),
+    delete: jest.fn(),
   },
 };
 
@@ -122,10 +124,6 @@ describe('AuthService', () => {
       },
     };
 
-    beforeEach(() => {
-      jest.clearAllMocks();
-    });
-
     describe('and the user already exists', () => {
       beforeEach(() => {
         mockPrisma.user.findUnique.mockResolvedValue(createdUser);
@@ -164,10 +162,6 @@ describe('AuthService', () => {
       password: 'kosar54321',
     };
 
-    beforeEach(() => {
-      jest.clearAllMocks();
-    });
-
     describe('and the user not exists', () => {
       beforeEach(() => {
         mockPrisma.user.findUnique.mockResolvedValue(null);
@@ -194,6 +188,72 @@ describe('AuthService', () => {
           refreshToken: 'refresh',
           user: result.user,
         });
+      });
+    });
+
+    describe('and the password match', () => {
+      beforeEach(() => {
+        mockPrisma.user.findUnique.mockResolvedValue(foundUser);
+        mockHashService.verify.mockResolvedValue(true);
+        mockJwtService.signAsync.mockResolvedValue('access');
+        mockPrisma.refreshToken.upsert.mockResolvedValue({
+          token: 'refresh',
+        });
+      });
+      it('should return tokens', async () => {
+        const result = await authService.login(loginDto, userAgent);
+        expect(result).toEqual({
+          accessToken: 'access',
+          refreshToken: 'refresh',
+          user: result.user,
+        });
+      });
+    });
+    describe('and the password not match', () => {
+      beforeEach(() => {
+        mockPrisma.user.findUnique.mockResolvedValue(foundUser);
+        mockHashService.verify.mockResolvedValue(false);
+      });
+      it('should throw invalid credentials', async () => {
+        await expect(authService.login(loginDto, userAgent)).rejects.toThrow(
+          'Invalid credentials',
+        );
+      });
+    });
+  });
+
+  describe('when refresh tokens', () => {
+    const token = 'refresh';
+
+    describe('and refresh token is valid', () => {
+      beforeEach(() => {
+        mockPrisma.refreshToken.findUnique.mockResolvedValue({
+          token,
+          user: foundUser,
+        });
+        mockPrisma.refreshToken.delete.mockResolvedValue(undefined);
+        mockJwtService.signAsync.mockResolvedValue('access');
+        mockPrisma.refreshToken.upsert.mockResolvedValue({
+          token: 'refresh',
+        });
+      });
+      it('should return refresh tokens', async () => {
+        const result = await authService.refresh(token, userAgent);
+        expect(result).toEqual({
+          accessToken: 'access',
+          refreshToken: 'refresh',
+        });
+      });
+    });
+
+    describe('and refresh token is invalid', () => {
+      beforeEach(() => {
+        mockPrisma.refreshToken.findUnique.mockResolvedValue(null);
+      });
+      it('should throw error', async () => {
+        await expect(authService.refresh(token, userAgent)).rejects.toThrow(
+          'Invalid refresh token',
+        );
       });
     });
   });
