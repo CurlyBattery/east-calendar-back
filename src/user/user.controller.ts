@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { Roles } from '@app/common';
-import { RoleUser } from '../../generated/prisma';
+import { CurrentUser, Roles } from '@app/common';
+import { RoleUser, User } from '../../generated/prisma';
 
 @Controller('users')
 export class UserController {
@@ -19,14 +19,13 @@ export class UserController {
     return this.userService.getById(id);
   }
 
-  @Patch(':id')
-  async updateUser(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-    return this.userService.update(id, dto);
+  @Patch()
+  async updateUser(@CurrentUser() user: User, @Body() dto: UpdateUserDto) {
+    return this.userService.update(user.id, dto);
   }
 
-  @Roles(RoleUser.ADMIN)
-  @Delete(':id')
-  async deleteUser(@Param('id') id: string) {
-    await this.userService.delete(id);
+  @Delete()
+  async deleteUser(@CurrentUser() user: User) {
+    await this.userService.delete(user.id);
   }
 }
