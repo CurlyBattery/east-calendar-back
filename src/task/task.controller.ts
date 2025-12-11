@@ -31,9 +31,9 @@ export class TaskController {
   @Get('my/:id')
   findAllMyByProject(
     @Param('id') projectId: string,
-    @CurrentUser() user: User,
+    @Query('text') text?: string,
   ) {
-    return this.taskService.findAllMyByProject(projectId, user.id);
+    return this.taskService.findAllByProject(projectId, text);
   }
 
   @Get(':id')

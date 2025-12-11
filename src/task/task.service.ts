@@ -88,14 +88,31 @@ export class TaskService {
     return tasks;
   }
 
-  findAllMyByProject(projectId: string, userId: string) {
-    return this.prisma.task.findMany({
-      where: { projectId: projectId, assigneeId: userId },
+  async findAllByProject(projectId: string, text?: string) {
+    if (!text) {
+      return this.prisma.task.findMany({
+        where: { projectId },
+        include: {
+          assignee: true,
+          creator: true,
+        },
+      });
+    }
+
+    const results = await this.tasksSearchService.search(text);
+    const ids = results.map((task) => task.id);
+    if (!ids.length) {
+      return [];
+    }
+    const tasks = await this.prisma.task.findMany({
+      where: { id: { in: ids }, projectId },
       include: {
         assignee: true,
         creator: true,
+        project: true,
       },
     });
+    return tasks;
   }
 
   async findOne(id: string) {
