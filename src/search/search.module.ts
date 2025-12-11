@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
+import { EnvModule, EnvService } from '@app/common';
 
 @Module({
   imports: [
-    ElasticsearchModule.register({
-      node: 'http://elasticsearch:9200',
-      auth: {
-        username: 'elastic',
-        password: 'changeme',
-      },
+    EnvModule,
+    ElasticsearchModule.registerAsync({
+      imports: [EnvModule],
+      inject: [EnvService],
+      useFactory: async (envService: EnvService) => ({
+        node: envService.get('ELASTICSEARCH_NODE'),
+        auth: {
+          username: 'elastic',
+          password: 'changeme',
+        },
+      }),
     }),
   ],
   exports: [ElasticsearchModule],

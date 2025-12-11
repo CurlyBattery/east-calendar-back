@@ -8,6 +8,7 @@ export const envSchema = z.object({
   REFRESH_EXP: z.string(),
   YOOKASSA_CALLBACK: z.string(),
   FRONTEND_URL: z.string(),
+  ELASTICSEARCH_NODE: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;
