@@ -11,8 +11,8 @@ import {
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { UpdateTaskDto } from './dtos/update-task.dto';
-import { CurrentUser, Roles } from '@app/common';
-import { RoleUser, User } from '../../generated/prisma';
+import { CurrentUser } from '@app/common';
+import { User } from '../../generated/prisma';
 
 @Controller('tasks')
 export class TaskController {

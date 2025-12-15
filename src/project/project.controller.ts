@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
@@ -30,8 +31,8 @@ export class ProjectController {
   }
 
   @Get()
-  myProjects(@CurrentUser() user: User) {
-    return this.projectService.getAllMyProjects(user.id);
+  findAllMy(@CurrentUser() user: User, @Query('text') text?: string) {
+    return this.projectService.findAllMy(user.id, text);
   }
 
   @Get(':id')

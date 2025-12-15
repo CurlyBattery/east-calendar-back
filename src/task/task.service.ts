@@ -139,7 +139,7 @@ export class TaskService {
       throw new NotFoundException('Task not found');
     }
 
-    return this.prisma.task.update({
+    const updatedTask = await this.prisma.task.update({
       where: { id },
       data: {
         title: dto.title,
@@ -154,6 +154,8 @@ export class TaskService {
         project: true,
       },
     });
+    await this.tasksSearchService.update(updatedTask);
+    return updatedTask;
   }
 
   async delete(id: string) {
@@ -163,7 +165,7 @@ export class TaskService {
     if (!task) {
       throw new NotFoundException('Task not found');
     }
-
+    await this.tasksSearchService.remove(id);
     await this.prisma.task.delete({ where: { id } });
   }
 }

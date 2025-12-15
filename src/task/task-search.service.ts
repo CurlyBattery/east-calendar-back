@@ -48,7 +48,7 @@ export class TasksSearchService {
     return hits.hits.map((hit) => hit._source);
   }
 
-  async remove(taskId: number): Promise<void> {
+  async remove(taskId: string): Promise<void> {
     await this.elasticsearchService.deleteByQuery({
       index: this.index,
       query: {

@@ -11,13 +11,17 @@ import { AddMemberDto } from './dtos/add-member.dto';
 import { RoleMember } from '../../generated/prisma';
 import { DeleteMemberDto } from './dtos/delete-member.dto';
 import { UpdateMemberDto } from './dtos/update-member.dto';
+import { ProjectSearchService } from './project-search.service';
 
 @Injectable()
 export class ProjectService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly projectSearchService: ProjectSearchService,
+  ) {}
 
   async create(dto: CreateProjectDto, userId: string) {
-    return this.prisma.project.create({
+    const project = await this.prisma.project.create({
       data: {
         name: dto.name,
         description: dto.description,
@@ -33,11 +37,33 @@ export class ProjectService {
         owner: true,
       },
     });
+    await this.projectSearchService.indexProject(project);
+    return project;
   }
 
-  getAllMyProjects(userId: string) {
-    return this.prisma.project.findMany({
+  async findAllMy(userId: string, text?: string) {
+    if (!text) {
+      return this.prisma.project.findMany({
+        where: {
+          projectMembers: {
+            some: {
+              userId,
+            },
+          },
+        },
+        include: {
+          owner: true,
+        },
+      });
+    }
+    const results = await this.projectSearchService.search(text);
+    const ids = results.map((project) => project.id);
+    if (!ids.length) {
+      return [];
+    }
+    const projects = await this.prisma.project.findMany({
       where: {
+        id: { in: ids },
         projectMembers: {
           some: {
             userId,
@@ -48,6 +74,7 @@ export class ProjectService {
         owner: true,
       },
     });
+    return projects;
   }
 
   async getById(id: string, userId: string) {
