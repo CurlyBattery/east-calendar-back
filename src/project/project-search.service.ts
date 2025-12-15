@@ -15,6 +15,7 @@ export class ProjectSearchService {
       document: {
         id: project.id,
         name: project.name,
+        description: project.description,
       },
     });
   }
@@ -28,6 +29,13 @@ export class ProjectSearchService {
             {
               wildcard: {
                 name: {
+                  value: `*${text.toLowerCase()}*`,
+                },
+              },
+            },
+            {
+              wildcard: {
+                description: {
                   value: `*${text.toLowerCase()}*`,
                 },
               },
