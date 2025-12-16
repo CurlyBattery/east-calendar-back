@@ -214,7 +214,6 @@ export class AuthService {
     });
   }
 
-  // получить сгенерированный qr code
   async generateQrCode(userAgent: string) {
     const token = v4();
     const session = await this.prisma.qrCodeSession.upsert({

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CurrentUser } from '@app/common';
 import { User } from '../../generated/prisma';
