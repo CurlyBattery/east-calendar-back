@@ -52,7 +52,7 @@ export class AuthController {
     @UserAgent() userAgent: string,
   ) {
     if (file) {
-      dto.avatarPath = `api/uploads/${file.filename}`;
+      dto.avatarPath = `uploads/${file.filename}`;
     }
 
     const { accessToken, refreshToken, user } = await this.authService.register(
