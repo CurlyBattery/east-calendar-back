@@ -193,15 +193,34 @@ export class ProjectService {
       throw new ForbiddenException();
     }
 
+    const ids = await this.prisma.task.findMany({
+      where: {
+        assigneeId: dto.memberId,
+        projectId,
+      },
+      select: {
+        id: true,
+      },
+    });
     if (dto.memberId !== ownerId) {
-      await this.prisma.projectMember.delete({
-        where: {
-          projectId_userId: {
-            projectId,
-            userId: dto.memberId,
+      await this.prisma.$transaction([
+        this.prisma.task.deleteMany({
+          where: {
+            id: {
+              in: ids.map((task) => task.id),
+            },
           },
-        },
-      });
+        }),
+        this.prisma.projectMember.delete({
+          where: {
+            projectId_userId: {
+              projectId,
+              userId: dto.memberId,
+            },
+          },
+        }),
+      ]);
+
       return { message: 'Member successfully deleted' };
     } else {
       throw new BadRequestException('You cannot delete yourself');
