@@ -22,7 +22,7 @@ export class PaymentService {
   async createPayment(userId: string) {
     const paymentData: CreatePaymentRequest = {
       amount: {
-        value: 499,
+        value: 11,
         currency: CurrencyEnum.RUB,
       },
       description: 'Test payment',
