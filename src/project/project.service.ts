@@ -139,6 +139,13 @@ export class ProjectService {
         userId: dto.userId,
         role: dto.role,
       },
+      include: {
+        user: {
+          include: {
+            plan: true,
+          },
+        },
+      },
     });
   }
 

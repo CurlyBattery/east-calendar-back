@@ -147,6 +147,7 @@ export class TaskService {
         start: dto.start,
         status: dto.status,
         end: dto.end,
+        assigneeId: dto.assigneeId,
       },
       include: {
         creator: true,

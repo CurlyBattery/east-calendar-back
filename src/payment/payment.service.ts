@@ -5,7 +5,7 @@ import {
   PaymentMethodsEnum,
   YookassaService,
 } from 'nestjs-yookassa';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SubscriptionPlan } from '../../generated/prisma';
 import { EnvService } from '@app/common';
@@ -35,7 +35,7 @@ export class PaymentService {
         return_url: this.envService.get('YOOKASSA_CALLBACK'),
       },
       metadata: {
-        order_id: '12345678',
+        order_id: userId,
       },
     };
 
@@ -58,7 +58,7 @@ export class PaymentService {
       orderBy: { createdAt: 'desc' },
     });
 
-    if (!dbPayment) throw new Error('Payment not found');
+    if (!dbPayment) throw new NotFoundException('Payment not found');
     const result = await this.yookassaService.payments.capture(
       dbPayment.paymentId,
     );
